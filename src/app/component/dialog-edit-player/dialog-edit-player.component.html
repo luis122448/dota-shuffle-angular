@@ -1,0 +1,46 @@
+<section class="dialog-alert-container">
+  <!-- <div class="flex justify-center">
+    <fa-icon [icon]="faCircleMinus" size="2xl" class="text-sky-600"></fa-icon>
+  </div> -->
+  <form action="#" [formGroup]="formPlayer" class="flex flex-col space-y-4">
+    <div class="flex flex-col space-y-2">
+      <div class="grid grid-cols-3 items-center">
+        <label for="name" class="text-inline">Name</label>
+        <input
+          name="name"
+          type="text"
+          class="input-default col-span-2"
+          placeholder="Name"
+          formControlName="name"
+          [class.select-invalid]="isInputInvalid('name')"
+        />
+      </div>
+      <div class="grid grid-cols-3 items-center">
+        <label for="mmr" class="text-inline">MMR</label>
+        <input
+          name="mmr"
+          type="text"
+          class="input-default col-span-2"
+          placeholder="MMR"
+          formControlName="mmr"
+          [class.select-invalid]="isInputInvalid('mmr')"
+        />
+      </div>
+    </div>
+  </form>
+  <div class="flex justify-center gap-x-4">
+    <app-button-standard
+      (click)="onSave()"
+      colorBtn="sky"
+      optionBtn="save">
+      Save
+    </app-button-standard>
+    <app-button-standard
+      (click)="onClose()"
+      colorBtn="red"
+      optionBtn="close"
+    >
+      Close
+    </app-button-standard>
+  </div>
+</section>

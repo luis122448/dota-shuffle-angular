@@ -1,0 +1,10 @@
+version: '3.8'  # Puedes ajustar la versión según la que desees usar
+
+services:
+  postgres:
+    container_name: dota-shuffle-angular
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"

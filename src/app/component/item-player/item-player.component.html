@@ -1,0 +1,28 @@
+<section
+  class="h-12 w-auto flex flex-row justify-between items-center space-x-4 border rounded-lg px-1"
+>
+  <article class="w-12">
+    <img
+      [src]="'../../../assets/image/medal/' + player?.medal"
+      alt="medal"
+      width="40px"
+      height="40px"
+      class="object-cover"
+    />
+  </article>
+  <article class="text-inline-sm font-semibold">{{ player?.label }}</article>
+  <article *ngIf="isEdit" class="flex flex-row justify-end space-x-1">
+    <app-button-operac
+      [optionBtn]="'edit'"
+      [colorBtn]="'sky'"
+      (click)="onEdit()"
+    >
+    </app-button-operac>
+    <app-button-operac
+      [optionBtn]="'delete'"
+      [colorBtn]="'sky'"
+      (click)="onDropped()"
+    >
+    </app-button-operac>
+  </article>
+</section>

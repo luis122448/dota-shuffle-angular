@@ -1,0 +1,181 @@
+<main
+  class="h-full w-auto grid grid-cols-3 gap-x-6 bg-slate-100 dark:bg-slate-900 dark:text-gray-400 m-auto"
+>
+  <section class="col-span-1 flex flex-col justify-start">
+    <article class="px-4 py-2 h-32 w-auto my-auto">
+      <form action="#" [formGroup]="formPlayer" class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-2">
+          <div class="grid grid-cols-3 items-center">
+            <label for="name" class="text-inline">Name</label>
+            <input
+              name="name"
+              type="text"
+              class="input-default col-span-2"
+              placeholder="Name"
+              formControlName="name"
+              [class.select-invalid]="isInputInvalid('name')"
+            />
+          </div>
+          <div class="grid grid-cols-3 items-center">
+            <label for="mmr" class="text-inline">MMR</label>
+            <input
+              name="mmr"
+              type="text"
+              class="input-default col-span-2"
+              placeholder="MMR"
+              formControlName="mmr"
+              [class.select-invalid]="isInputInvalid('mmr')"
+            />
+          </div>
+        </div>
+        <div class="flex flex-col justify-between items-end space-y-2">
+          <app-button-standard
+            [disabledBtn]="formPlayer.invalid"
+            optionBtn="new"
+            colorBtn="sky"
+            (click)="addPlayer()"
+            >Add Player</app-button-standard
+          >
+        </div>
+      </form>
+    </article>
+    <article class="space-y-2 items-center py-2">
+      <h2 class="text-inline-md font-semibold">No asignado</h2>
+      <div
+        cdkDropList
+        #notAsig="cdkDropList"
+        [cdkDropListData]="getTeam(0)"
+        class="example-list-explain"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div *ngFor="let item of getTeam(0)" cdkDrag>
+          <app-item-player
+            [player]="item"
+            (dropped)="deletePlayer($event)"
+            [isEdit]="true"
+          ></app-item-player>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 items-center">
+        <label for="total0" class="text-inline col-span-2">Total</label>
+        <input
+          name="total0"
+          type="number"
+          class="input-default col-span-1 text-right"
+          placeholder="total0"
+          [(ngModel)]="total0"
+          [disabled]="true"
+        />
+      </div>
+    </article>
+  </section>
+  <section class="col-span-2 w-full flex flex-col">
+    <article>
+
+    </article>
+    <article class="flex flex-row justify-around items-center h-20 w-auto">
+      <app-button-standard
+        [disabledBtn]="formPlayer.invalid"
+        optionBtn="shuffle"
+        colorBtn="sky"
+        (click)="onShuffle()"
+        >Shuffle</app-button-standard
+      ><app-button-standard
+        [disabledBtn]="formPlayer.invalid"
+        optionBtn="refresh"
+        colorBtn="sky"
+        (click)="onReset()"
+        >Reset</app-button-standard
+      >
+      <app-button-standard
+        [disabledBtn]="formPlayer.invalid"
+        optionBtn="delete"
+        colorBtn="red"
+        (click)="onDeleteAll()"
+        >Delete All
+      </app-button-standard>
+    </article>
+    <article class="h-full grid grid-cols-2 gap-x-6">
+      <div class="space-y-2 items-center py-2">
+        <h2 class="text-inline-md font-semibold">Team N°1</h2>
+        <div
+          cdkDropList
+          #Team1="cdkDropList"
+          [cdkDropListData]="getTeam(1)"
+          [cdkDropListConnectedTo]="[Team2]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div *ngFor="let item of getTeam(1)" cdkDrag>
+            <app-item-player
+              [player]="item"
+              (dropped)="deletePlayer($event)"
+            ></app-item-player>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 items-center">
+          <label for="total1" class="text-inline col-span-2">Total</label>
+          <input
+            name="total1"
+            type="number"
+            class="input-default col-span-1 text-right"
+            placeholder="total1"
+            [(ngModel)]="total1"
+            [disabled]="true"
+          />
+        </div>
+        <div class="grid grid-cols-3 items-center" *ngIf="diff >= 0">
+          <label for="diff" class="text-inline col-span-2">Diferencia</label>
+          <input
+            name="diff"
+            type="text"
+            class="input-default col-span-1 text-right"
+            placeholder="diff"
+            [(ngModel)]="diference"
+            [disabled]="true"
+          />
+        </div>
+      </div>
+      <div class="space-y-2 items-center py-2">
+        <h2 class="text-inline-md font-semibold">Team N°2</h2>
+        <div
+          cdkDropList
+          #Team2="cdkDropList"
+          [cdkDropListData]="getTeam(2)"
+          [cdkDropListConnectedTo]="[Team1]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div *ngFor="let item of getTeam(2)" cdkDrag>
+            <app-item-player
+              [player]="item"
+              (dropped)="deletePlayer($event)"
+            ></app-item-player>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 items-center">
+          <label for="total2" class="text-inline col-span-2">Total</label>
+          <input
+            name="total2"
+            type="number"
+            class="input-default col-span-1 text-right"
+            placeholder="total2"
+            [(ngModel)]="total2"
+            [disabled]="true"
+          />
+        </div>
+        <div class="grid grid-cols-3 items-center" *ngIf="diff < 0">
+          <label for="diff" class="text-inline col-span-2">Diferencia</label>
+          <input
+            name="diff"
+            type="text"
+            class="input-default col-span-1 text-right"
+            placeholder="diff"
+            [(ngModel)]="diference"
+            [disabled]="true"
+          />
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
