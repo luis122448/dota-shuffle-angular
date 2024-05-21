@@ -53,6 +53,17 @@ body {
   background: #f1f1f1;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
@@ -420,11 +431,11 @@ body {
 }
 
 .example-list{
-  @apply flex flex-col w-full space-y-2 min-h-[250px] overflow-hidden rounded-lg border border-dashed border-gray-300 px-1 py-2 dark:border-gray-600;
+  @apply flex flex-col w-full space-y-2 h-[300px] overflow-hidden rounded-lg border-2 border-dashed border-gray-800 px-1 py-2 dark:border-gray-600;
 }
 
 .example-list-explain{
-  @apply flex flex-col w-full space-y-2 h-[400px] overflow-y-auto rounded-lg border border-dashed border-gray-300 px-1 py-2 dark:border-gray-600;
+  @apply flex flex-col w-full space-y-2 h-[400px] overflow-y-auto rounded-lg border-2 border-dashed border-gray-800 px-1 py-2 dark:border-gray-600;
 }
 
 .element-list{
