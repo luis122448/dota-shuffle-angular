@@ -6,6 +6,7 @@ import {
   BestShuffleResult,
   TotalCombination,
 } from '../model/dota-player.model';
+import { DefaultValuesService } from './default-values.service';
 
 interface Medal {
   [menbersey: number]: number;
@@ -15,7 +16,7 @@ interface Medal {
   providedIn: 'root',
 })
 export class DotaPlayerService {
-  constructor() {}
+  constructor(defaultValuesService: DefaultValuesService) {}
 }
 
 export class DotaPlayerDataSource {
@@ -58,8 +59,8 @@ export class DotaPlayerDataSource {
     34: 5220,
     35: 5420,
     36: 5620,
-    37: 5820,
-    38: 6020,
+    37: 9000,
+    38: 10000,
     39: 99999,
   };
   numberShuffle = 0;
@@ -77,21 +78,21 @@ export class DotaPlayerDataSource {
     const combinations: number[][] = [];
 
     function helper(start: number, path: number[]) {
-        if (path.length === k) {
-            combinations.push([...path]);
-            return;
-        }
+      if (path.length === k) {
+        combinations.push([...path]);
+        return;
+      }
 
-        for (let i = start; i < arr.length; i++) {
-            path.push(arr[i]);
-            helper(i + 1, path);
-            path.pop();
-        }
+      for (let i = start; i < arr.length; i++) {
+        path.push(arr[i]);
+        helper(i + 1, path);
+        path.pop();
+      }
     }
 
     helper(0, []);
     return combinations;
-}
+  }
 
   private findBestGroups(arr: number[]): [number[], number[]] {
     const k = arr.length / 2; // Número de jugadores por grupo (5 en este caso)
@@ -100,20 +101,76 @@ export class DotaPlayerDataSource {
     let minDifference = Infinity;
 
     for (let i = 0; i < allCombinations.length; i++) {
-        const group1 = allCombinations[i];
-        const group2 = arr.filter(player => !group1.includes(player));
+      const group1 = allCombinations[i];
+      const group2 = arr.filter((player) => !group1.includes(player));
 
-        const sum1 = group1.reduce((acc, num) => acc + num, 0);
-        const sum2 = group2.reduce((acc, num) => acc + num, 0);
-        const difference = Math.abs(sum1 - sum2);
+      const sum1 = group1.reduce((acc, num) => acc + num, 0);
+      const sum2 = group2.reduce((acc, num) => acc + num, 0);
+      const difference = Math.abs(sum1 - sum2);
 
-        if (difference < minDifference) {
-            minDifference = difference;
-            bestCombination = [group1, group2];
-        }
+      if (difference < minDifference) {
+        minDifference = difference;
+        bestCombination = [group1, group2];
+      }
     }
     return bestCombination!;
-}
+  }
+
+  private findSecondBestShuffle(arr: number[]): [number[],number[]] {
+    const k = arr.length / 2; // Número de jugadores por grupo (5 en este caso)
+    const allCombinations = this.getCombinations(arr, k);
+    let bestCombination: [number[], number[]] | null = null;
+    let minDifference = Infinity;
+    let secondBestCombination: [number[], number[]] | null = null;
+    let secondMinDifference = Infinity;
+
+    for (let i = 0; i < allCombinations.length; i++) {
+      const group1 = allCombinations[i];
+      const group2 = arr.filter((player) => !group1.includes(player));
+
+      const sum1 = group1.reduce((acc, num) => acc + num, 0);
+      const sum2 = group2.reduce((acc, num) => acc + num, 0);
+      const difference = Math.abs(sum1 - sum2);
+
+      if (difference < minDifference) {
+        secondMinDifference = minDifference;
+        minDifference = difference;
+        secondBestCombination = bestCombination;
+        bestCombination = [group1, group2];
+      }
+    }
+    return secondBestCombination!;
+  }
+
+  private findTerceBestShuffle(arr: number[]): [number[],number[]] {
+    const k = arr.length / 2; // Número de jugadores por grupo (5 en este caso)
+    const allCombinations = this.getCombinations(arr, k);
+    let bestCombination: [number[], number[]] | null = null;
+    let minDifference = Infinity;
+    let secondBestCombination: [number[], number[]] | null = null;
+    let secondMinDifference = Infinity;
+    let terceBestCombination: [number[], number[]] | null = null;
+    let terceMinDifference = Infinity;
+
+    for (let i = 0; i < allCombinations.length; i++) {
+      const group1 = allCombinations[i];
+      const group2 = arr.filter((player) => !group1.includes(player));
+
+      const sum1 = group1.reduce((acc, num) => acc + num, 0);
+      const sum2 = group2.reduce((acc, num) => acc + num, 0);
+      const difference = Math.abs(sum1 - sum2);
+
+      if (difference < minDifference) {
+        terceMinDifference = secondMinDifference;
+        secondMinDifference = minDifference;
+        minDifference = difference;
+        terceBestCombination = secondBestCombination;
+        secondBestCombination = bestCombination;
+        bestCombination = [group1, group2];
+      }
+    }
+    return terceBestCombination!;
+  }
 
   constructor() {}
 
@@ -147,6 +204,10 @@ export class DotaPlayerDataSource {
 
   public getPlayers() {
     return this.data.value;
+  }
+
+  public setPlayers(players: DotaPlayerModel[]) {
+    this.data.next(players);
   }
 
   public getTeam(team: number) {
@@ -205,16 +266,21 @@ export class DotaPlayerDataSource {
 
   public onShuffle() {
     const players = this.data.value;
-    // if(this.numberShuffle === 3) {
-    //   throw new Error('No se pueden hacer más de 3 shuffle');
-    // } else {
-    //   this.numberShuffle++;
-    // }
     if (players.length !== 10) {
       throw new Error('Debe haber exactamente 10 jugadores');
     }
     const plarysMmr = players.map((player) => player.mmr);
-    const bestCombinatiosMmr = this.findBestGroups(plarysMmr);
+    let bestCombinatiosMmr : [number[], number[]] = [[], []];
+    if (this.numberShuffle === 0) {
+      bestCombinatiosMmr = this.findBestGroups(plarysMmr);
+      this.numberShuffle++;
+    } else if (this.numberShuffle === 1) {
+      bestCombinatiosMmr = this.findSecondBestShuffle(plarysMmr);
+      this.numberShuffle++;
+    } else {
+      bestCombinatiosMmr = this.findTerceBestShuffle(plarysMmr);
+      this.numberShuffle=0;
+    }
     console.log('Mejores combinaciones de MMR: ', bestCombinatiosMmr);
     // Asignando el Team 1 y Team 2
     players.forEach((player) => {

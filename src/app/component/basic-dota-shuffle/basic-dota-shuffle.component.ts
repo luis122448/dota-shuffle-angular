@@ -11,6 +11,7 @@ import { DotaPlayerDataSource } from 'src/app/service/dota-player.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogErrorAlertComponent } from 'src/app/shared/component/dialog-error-alert/dialog-error-alert.component';
+import { DefaultValuesService } from 'src/app/service/default-values.service';
 
 @Component({
   selector: 'app-basic-dota-shuffle',
@@ -41,10 +42,17 @@ export class BasicDotaShuffleComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    private defaultValuesService: DefaultValuesService,
     private dialog: Dialog
   ) {
     this.BuildForm();
-    this.playerDataSouce.onTest(true);
+    const players : DotaPlayerModel[] = this.defaultValuesService.getLocalStorageValue('players')
+    if(players.length > 0){
+      this.playerDataSouce.setPlayers(players);
+    } else {
+      this.playerDataSouce.onTest(true);
+    }
+    this.onCalculate();
   }
 
   getTeam(team: number): DotaPlayerModel[] {
@@ -63,6 +71,8 @@ export class BasicDotaShuffleComponent {
       console.log(this.playerDataSouce.getPlayers());
       this.total0 = this.playerDataSouce.getTotal(0);
       this.BuildForm();
+      this.onCalculate();
+      this.defaultValuesService.setLocalStorageValue('players', this.playerDataSouce.getPlayers());
     } catch (error: any) {
       this.dialog.open(DialogErrorAlertComponent, {
         width: '400px',
@@ -76,11 +86,23 @@ export class BasicDotaShuffleComponent {
 
   deletePlayer(id: number) {
     this.playerDataSouce.deletePlayer(id);
+    this.onCalculate();
+    this.defaultValuesService.setLocalStorageValue('players', this.playerDataSouce.getPlayers());
   }
 
   onShuffle() {
-    this.playerDataSouce.onShuffle();
-    this.onCalculate();
+    try {
+      this.playerDataSouce.onShuffle();
+      this.onCalculate();
+    } catch (error: any) {
+      this.dialog.open(DialogErrorAlertComponent, {
+        width: '400px',
+        data: {
+          status: -3,
+          message: error.message,
+        },
+      });
+    }
   }
 
   onReset() {
@@ -98,6 +120,8 @@ export class BasicDotaShuffleComponent {
 
   onDeleteAll() {
     this.playerDataSouce.deleteAll();
+    this.onCalculate();
+    this.defaultValuesService.setLocalStorageValue('players', this.playerDataSouce.getPlayers());
   }
 
   drop(event: CdkDragDrop<DotaPlayerModel[]>) {

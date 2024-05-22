@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DotaPlayerModel } from 'src/app/model/dota-player.model';
 import { DotaPlayerDataSource } from 'src/app/service/dota-player.service';
 import { DialogEditPlayerComponent } from '../dialog-edit-player/dialog-edit-player.component';
+import { DefaultValuesService } from 'src/app/service/default-values.service';
 
 @Component({
   selector: 'app-item-player',
@@ -17,7 +18,8 @@ export class ItemPlayerComponent {
   @Output() dropped = new EventEmitter<number>();
 
   constructor(
-    private Dialog: Dialog
+    private Dialog: Dialog,
+    private defaultValuesService: DefaultValuesService
   ) { }
 
   onDropped() {
@@ -31,6 +33,7 @@ export class ItemPlayerComponent {
       width: '400px',
       data: this.player
     });
+    this.defaultValuesService.setLocalStorageValue('players', this.playerDataSouce.getPlayers());
   }
 
 }
