@@ -5,6 +5,7 @@ export interface DotaPlayerModel {
   mmr: number;
   team: number;
   medal: string;
+  maxSoloMmr?: boolean;
 }
 
 export interface BasicPlayerModel {

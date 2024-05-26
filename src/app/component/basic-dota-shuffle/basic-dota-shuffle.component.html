@@ -40,7 +40,13 @@
       </form>
     </article>
     <article class="space-y-2 items-center py-2">
-      <h2 class="text-inline-md font-semibold">No asignado</h2>
+      <div class="flex flex-row justify-between">
+        <h2 class="text-inline-md font-semibold">No asignado</h2>
+        <h2 class="text-inline-md font-semibold"><span [ngClass]="{
+          'text-sky-800 dark:text-sky-700': countPlayersNotInTeam === 10,
+          'text-red-800 dark:text-red-700': countPlayersNotInTeam < 10
+        }">{{countPlayersNotInTeam}}</span> / 10</h2>
+      </div>
       <div
         cdkDropList
         #notAsig="cdkDropList"

@@ -210,6 +210,13 @@ export class DotaPlayerDataSource {
     this.data.next(players);
   }
 
+  public countPlayersNotInTeam() {
+    const countPlayersNotInTeam = this.data.value.filter(
+      (player) => player.team === 0
+    ).length;
+    return countPlayersNotInTeam;
+  }
+
   public getTeam(team: number) {
     return this.data.value.filter((player) => player.team === team);
   }
@@ -252,6 +259,15 @@ export class DotaPlayerDataSource {
       }
       return player;
     });
+    // Recalcular el maxSoloMmr de cada equipo
+    const team1 = this.getTeam(1);
+    const team2 = this.getTeam(2);
+    const maxSoloMmrTeam1 = Math.max(...team1.map((player) => player.mmr));
+    const maxSoloMmrTeam2 = Math.max(...team2.map((player) => player.mmr));
+    players.forEach((player) => {
+      player.maxSoloMmr =
+        player.mmr === maxSoloMmrTeam1 || player.mmr === maxSoloMmrTeam2;
+    });
     this.data.next(players);
   }
 
@@ -281,10 +297,12 @@ export class DotaPlayerDataSource {
       bestCombinatiosMmr = this.findTerceBestShuffle(plarysMmr);
       this.numberShuffle=0;
     }
-    console.log('Mejores combinaciones de MMR: ', bestCombinatiosMmr);
+    // console.log('Mejores combinaciones de MMR: ', bestCombinatiosMmr);
     // Asignando el Team 1 y Team 2
     players.forEach((player) => {
       player.team = bestCombinatiosMmr[0].includes(player.mmr) ? 1 : 2;
+      // Aignar el MaxSoloMmr al jugador con el mayor mmr de cada equipo
+      player.maxSoloMmr = ( player.mmr === Math.max(...bestCombinatiosMmr[0]) || player.mmr === Math.max(...bestCombinatiosMmr[1]) );
     });
     this.data.next(players);
   }
@@ -292,6 +310,7 @@ export class DotaPlayerDataSource {
   public onReset() {
     const players = this.data.value.map((player) => {
       player.team = 0;
+      player.maxSoloMmr = false;
       return player;
     });
     this.data.next(players);

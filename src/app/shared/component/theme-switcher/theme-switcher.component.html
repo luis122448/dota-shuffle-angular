@@ -5,6 +5,7 @@
       name="themeSwitcher"
       id="themeSwitcher"
       class="hidden"
+      [checked]="isDark"
       (click)="onChange(true)"
     />
     <label for="themeSwitcher" class="relative cursor-pointer">
@@ -16,7 +17,7 @@
           size="lg"
         ></fa-icon>
         <div
-          class="switchball absolute left-2 h-8 w-8 rounded-full bg-white shadow"
+          class="switchball absolute left-2.5 h-8 w-8 rounded-full bg-white shadow"
         ></div>
         <fa-icon
           [icon]="faMoon"

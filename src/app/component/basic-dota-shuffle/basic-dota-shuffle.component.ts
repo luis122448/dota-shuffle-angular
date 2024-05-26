@@ -27,6 +27,7 @@ export class BasicDotaShuffleComponent {
   total2: number = 0;
   diff: number = 0;
   diference: string = '';
+  countPlayersNotInTeam: number = 0;
 
   private BuildForm() {
     this.formPlayer = this.formBuilder.group({
@@ -116,6 +117,7 @@ export class BasicDotaShuffleComponent {
     this.total2 = this.playerDataSouce.getTotal(2);
     this.diff = this.total1 - this.total2;
     this.diference = '+' + Math.abs(this.diff) + ' MMR';
+    this.countPlayersNotInTeam = this.playerDataSouce.countPlayersNotInTeam();
   }
 
   onDeleteAll() {

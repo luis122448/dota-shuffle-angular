@@ -10,7 +10,6 @@ import { DefaultValuesService } from 'src/app/service/default-values.service';
 })
 export class ThemeSwitcherComponent implements OnChanges{
 
-  @Input() openSidebar: boolean = false;
   faSun = faSun
   faMoon = faMoon
   isDark = true;
