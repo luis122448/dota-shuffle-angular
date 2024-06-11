@@ -19,7 +19,7 @@ WORKDIR /home/app
 
 # Copy the build output and package files
 COPY --from=build /home/app/dist /home/app/dist
-COPY --from=build /home/app/package*.json /home/app
+COPY --from=build /home/app/package*.json /home/app/src
 
 RUN npm install --only=production
 
