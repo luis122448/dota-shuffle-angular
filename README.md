@@ -1,27 +1,48 @@
-# DotaShuffle
+![Logo del Projecto](./resources/logo.png)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.5.
+# Despliegue del Dota 2 Shuffler
 
-## Development server
+Aplicación para registrar 10 jugadores y equilibrarlos en dos equipos según el MMR, buscando que la diferencia entre los equipos sea la menor posible.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Características
+- Modelado e implemantacion de interfaces con HTML, CSS y TailwindCSS.
+- Routing y Navegación con Angular Router.
+- Configuracion con Nginx para el despliegue en producción.
+- Automatización del despliegue con Docker y Docker-Compose.
+- Aplicacion con soporte para modo oscuro.
 
-## Code scaffolding
+## Configuración del Entorno
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. **Clonar el Repositorio**
+    ```bash
+        git clone https://github.com/luis122448/dota-shuffle.git
+    ```
 
-## Build
+2. **Ingresar al directorio del proyecto**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    ```bash
+        cd dota-shuffle
+    ```
 
-## Running unit tests
+3. **Ejecutar el script de instalación**
+  
+    ```bash
+        sudo bash dev-install.sh
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Despliegue en Producción
 
-## Running end-to-end tests
+Para el despliegue en producción se ha utilizado Docker y Docker Compose, puede revisar el archivo docker-compose.yml para conocer los detalles de la configuración.
+Asimismo no se olvide de modificar las variables de entono, en asi archivo .env
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. **Ejecutar el script de despliegue**
+  
+    ```bash
+        sudo bash deploy.sh
+    ```
 
-## Further help
+## Contribuciones
+Las contribuciones son bienvenidas. Siéntete libre de mejorar este proyecto, agregar nuevas características o corregir problemas identificados. Para contribuir, crea un Pull Request o abre un Issue.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Licencia
+Este proyecto está bajo la licencia MIT License.
