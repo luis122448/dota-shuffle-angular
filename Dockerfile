@@ -10,16 +10,21 @@ COPY ./tailwind.config.js /home/app
 RUN npm install
 
 COPY ./src /home/app/src
-RUN npm run build --omit=dev
+RUN npm run build:ssr
 
-# Serve app with nginx server
-# Use official nginx image as the base image
-FROM nginx:latest
+# Serve stage
+FROM node:21-alpine AS serve
 
-# Copy the custom nginx configuration file to the container in the default location
-COPY ./nginx.conf /etc/nginx/nginx.conf
-# Copy the build output to replace the default nginx contents.
-COPY --from=build /home/app/dist/dota-shuffle /usr/share/nginx/html
+WORKDIR /home/app
 
-# Expose port 80
+# Copy the build output and package files
+COPY --from=build /home/app/dist /home/app/dist
+COPY --from=build /home/app/package*.json /home/app
+
+RUN npm install --only=production
+
+# Expose port 4000
 EXPOSE 80
+
+# Command to run the app with SSR
+CMD ["node", "dist/server/main.js"]

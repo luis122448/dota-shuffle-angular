@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/dota-shuffle",
+            "outputPath": "dist/dota-shuffle/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -99,6 +99,61 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/dota-shuffle/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "dota-shuffle:build:development",
+              "serverTarget": "dota-shuffle:server:development"
+            },
+            "production": {
+              "browserTarget": "dota-shuffle:build:production",
+              "serverTarget": "dota-shuffle:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dota-shuffle:build:production",
+              "serverTarget": "dota-shuffle:server:production"
+            },
+            "development": {
+              "browserTarget": "dota-shuffle:build:development",
+              "serverTarget": "dota-shuffle:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
