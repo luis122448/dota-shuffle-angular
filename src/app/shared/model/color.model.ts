@@ -10,9 +10,9 @@ export const COLORS:ObjColors = {
     'text-white': true,
   },
   blue: {
-    'bg-blue-700': true,
-    'hover:bg-blue-800': true,
-    'focus:ring-blue-300': true,
+    'bg-blue-900': true,
+    'hover:bg-blue-950': true,
+    'focus:ring-blue-450': true,
     'text-white': true,
   },
   red: {

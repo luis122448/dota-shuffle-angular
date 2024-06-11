@@ -16,33 +16,24 @@
     <article
       class="space-x-4 col-span-1 my-auto flex w-full items-center justify-end px-4"
     >
-      <!-- <a
-        [routerLink]="['/billing/dashboard']"
-        class="header-siderbar"
-        routerLinkActive="header-siderbar-active"
-      >
-        Tutorial
-      </a>
-      <a
-        [routerLink]="['/configuration/credits']"
-        class="header-siderbar"
-        routerLinkActive="header-siderbar-active"
-      >
-        Contact
-      </a> -->
-      <article class="col-span-1 my-auto">
-        <a
-          href="https://discord.gg/loz-zzz-afk-869348065063088149"
-          class="flex items-center"
-          target="_blank"
+      <div class="flex flex-row space-x-6">
+        <app-button-standard
+          [optionBtn]="'medal'"
+          [typeBtn]="'submit'"
+          [colorBtn]="'blue'"
+          (click)="openDialogCredits()"
         >
-          <img
-            src="../../../../../../assets/image/icon/discord-icon.png"
-            class="mr-3 h-8 w-8 rounded-md"
-            alt="Discord Logo"
-          />
-        </a>
-      </article>
+          Credits
+        </app-button-standard>
+        <app-button-standard
+          [optionBtn]="'discord'"
+          [typeBtn]="'submit'"
+          [colorBtn]="'blue'"
+          (click)="openDialogDicord()"
+        >
+          Discord
+        </app-button-standard>
+      </div>
       <app-theme-switcher></app-theme-switcher>
     </article>
   </nav>

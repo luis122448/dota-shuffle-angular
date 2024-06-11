@@ -1,4 +1,6 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { DiscordDialogComponent } from '../discord-dialog/discord-dialog.component';
 
 @Component({
   selector: 'app-footer',
@@ -6,6 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
+
+  constructor(
+    private dialog: Dialog
+  ) { }
 
   stackTechs: string[] = [
     "angular",

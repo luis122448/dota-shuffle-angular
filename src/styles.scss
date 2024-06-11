@@ -408,6 +408,11 @@ input[type="number"] {
   dark:bg-slate-900 dark:text-gray-400;
 }
 
+.default-container-light {
+  @apply m-auto bg-slate-50
+  dark:bg-slate-800 dark:text-gray-400;
+}
+
 .border-r-default {
   @apply border-b-2 border-r-sky-950
   dark:border-r-gray-400;
@@ -420,7 +425,6 @@ input[type="number"] {
 .resalt-text{
   @apply text-cyan-600 font-semibold
 }
-
 
 .siderbar-section-text {
   @apply flex w-full justify-start px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white

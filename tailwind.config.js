@@ -2,7 +2,7 @@
 module.exports = {
   important: true,
   content: [
-    "./src/**/*.{html,ts}",
+    "./src/**/*.{html,ts}","./node_modules/flowbite/**/*.js"
   ],
   darkMode: 'class',
   content: [
@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {}
-  }
+  },
+  plugins: [
+    require('flowbite/plugin')
+  ],
 }
 

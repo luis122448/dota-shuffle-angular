@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { faSpinner,faFloppyDisk,faCalculator,faCircleLeft,faBroomBall,faCircleXmark,faNewspaper,
 faMagnifyingGlass,faQuestion,faTrashCan,faPenToSquare, IconDefinition, faPlus, faTrashArrowUp, faRightToBracket, faFileInvoice, faUpload, faDownload,
-faShuffle} from '@fortawesome/free-solid-svg-icons';
+faShuffle,
+faMedal} from '@fortawesome/free-solid-svg-icons';
 import { Colors, COLORS } from '../../model/color.model';
 import { ButtonOption } from '../../model/button-option.model';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-button-standard',
@@ -75,6 +77,10 @@ export class ButtonStandardComponent {
         return faSpinner
       case 'shuffle':
         return faShuffle
+      case 'discord':
+        return faDiscord
+      case 'medal':
+        return faMedal
       default:
         return faQuestion; // Puedes establecer un ícono predeterminado aquí si es necesario
     }

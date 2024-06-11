@@ -1,0 +1,63 @@
+<main
+  class="default-container-light flex flex-col sapce-y-4 w-full h-full items-center rounded-md"
+>
+  <section class="h-[250px] w-[600px] relative">
+    <!-- <img
+      src="./../../../assets/image/wallpaper/tama-dota.png"
+      alt="discord-logo"
+      class="object-cover h-full w-full rounded-md"
+    /> -->
+    <div id="animation-carousel" class="relative w-full" data-carousel="slide">
+      <!-- Carousel wrapper -->
+      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <!-- Item 1 -->
+        <div
+          class="hidden duration-300 ease-linear"
+          data-carousel-item="active"
+        >
+          <img
+            src="./../../../assets/image/wallpaper/tama-dota.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+            class="h-[250px] w-[600px]"
+          />
+        </div>
+        <!-- Item 2 -->
+        <div class="hidden duration-300 ease-linear" data-carousel-item>
+          <img
+            src="./../../../assets/image/wallpaper/hero-dota.png"
+            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+            alt="..."
+            class="h-[250px] w-[600px]"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section
+    class="h-full w-96 flex flex-col space-y-2 items-center justify-around py-2"
+  >
+    <h1
+      class="font-semibold text-center text-sm text-slate-700 dark:bg-none dark:text-gray-200"
+    >
+      En Memoria de Tama ( Top 6 N.A )
+      <br><span class="resalt-text">Banned 2038</span>
+    </h1>
+    <p class="text-inline-md text-left">
+      Primer jugardor de <span class="resalt-text">La Mantita</span> en alcanzar
+      el TOP 6. Maestro con todos los heroes al nivel
+      <span class="resalt-text">30</span> ( Excepto Muerta )<br />
+      Gracias por tu legado en
+      <span class="resalt-text">DOTA 2.</span>
+    </p>
+    <app-button-standard
+      [optionBtn]="'close'"
+      [typeBtn]="'button'"
+      [colorBtn]="'red'"
+      (click)="closeDialog()"
+      class="pb-2"
+    >
+      Close
+    </app-button-standard>
+  </section>
+</main>

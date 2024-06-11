@@ -1,0 +1,55 @@
+<main
+  class="default-container-light flex flex-col sapce-y-4 w-full h-full items-center rounded-md"
+>
+  <section class="h-[250px] w-[600px]">
+    <img
+      src="./../../../assets/image/wallpaper/discord-dota.png"
+      alt="discord-logo"
+      class="object-cover h-full w-full rounded-md"
+    />
+  </section>
+  <section
+    class="h-full w-96 flex flex-col space-y-2 items-center justify-around py-2"
+  >
+    <h1
+      class="font-semibold text-center text-sm text-slate-700 dark:bg-none dark:text-gray-200"
+    >
+      Join Our Discord
+    </h1>
+    <p>
+      <li class="text-inline-md text-left">
+        Unete al mejor servidor de <span class="resalt-text">DOTA 2</span>,
+        rrapido y seguro a subir nuestro <span class="resalt-text">MMR</span>
+      </li>
+      <li class="text-inline-md text-left">
+        Todo de dota 2 en un solo lugar
+        <span class="resalt-text">TE ESPERAMOS</span>
+      </li>
+    </p>
+    <article class="flex flex-row justify-around space-x-6">
+
+    <app-button-standard
+    [optionBtn]="'discord'"
+    [typeBtn]="'button'"
+    [colorBtn]="'sky'"
+    class="pb-2"
+  >
+    <a
+      href="https://discord.gg/los-zzz-afk-dota-2"
+      target="_blank"
+      class="font-bold"
+      >Join!</a
+    >
+  </app-button-standard>
+  <app-button-standard
+    [optionBtn]="'close'"
+    [typeBtn]="'button'"
+    [colorBtn]="'red'"
+    (click)="closeDialog()"
+    class="pb-2"
+  >
+    Close
+  </app-button-standard>
+    </article>
+  </section>
+</main>
