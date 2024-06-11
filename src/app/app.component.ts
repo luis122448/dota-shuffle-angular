@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
       // Metadatos para Discord
       { property: 'og:site_name', content: 'Dota Shuffle MMR' }, // Nombre del sitio
       { property: 'og:locale', content: 'en_US' }, // Configuración regional
+      { property: 'og:image:alt', content: 'Dota Shuffle MMR' }, // Texto alternativo de la imagen
       { property: 'og:image:width', content: '1200' }, // Ancho de la imagen
       { property: 'og:image:height', content: '630' }, // Alto de la imagen
       { property: 'og:image:type', content: 'image/png' }, // Tipo de la imagen

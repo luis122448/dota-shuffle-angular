@@ -1,6 +1,6 @@
 ![Logo del Projecto](./resources/logo.png)
 
-# Despliegue del Dota 2 Shuffler
+# Dota 2 Shuffler MMR
 
 Aplicación para registrar 10 jugadores y equilibrarlos en dos equipos según el MMR, buscando que la diferencia entre los equipos sea la menor posible.
 
