@@ -24,6 +24,12 @@ export class AppComponent implements OnInit {
       { property: 'og:image', content: '/assets/image/icon/tama-icon.png' },
       { property: 'og:url', content: 'https://dota-shuffle.luis122448.com/' },
       { property: 'og:type', content: 'website' },
+      // Metadatos para Discord
+      { property: 'og:site_name', content: 'Dota Shuffle MMR' }, // Nombre del sitio
+      { property: 'og:locale', content: 'en_US' }, // Configuración regional
+      { property: 'og:image:width', content: '1200' }, // Ancho de la imagen
+      { property: 'og:image:height', content: '630' }, // Alto de la imagen
+      { property: 'og:image:type', content: 'image/png' }, // Tipo de la imagen
 
       // Twitter Card tags
       { name: 'twitter:card', content: 'summary_large_image' },
