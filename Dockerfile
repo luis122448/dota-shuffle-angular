@@ -28,4 +28,4 @@ RUN npm install --only=production
 EXPOSE 80
 
 # Command to run the app with SSR
-CMD ["node", "dist/server/main.js"]
+CMD ["node", "dist/dota-shuffle/server/main.js"]
