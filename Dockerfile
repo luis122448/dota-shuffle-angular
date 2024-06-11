@@ -7,6 +7,7 @@ COPY ./angular.json /home/app
 COPY ./package*.json /home/app
 COPY ./tsconfig*.json /home/app
 COPY ./tailwind.config.js /home/app
+COPY ./server.ts /home/app
 RUN npm install
 
 COPY ./src /home/app/src
@@ -19,7 +20,7 @@ WORKDIR /home/app
 
 # Copy the build output and package files
 COPY --from=build /home/app/dist /home/app/dist
-COPY --from=build /home/app/package*.json /home/app/src
+COPY --from=build /home/app/package*.json /home/app
 
 RUN npm install --only=production
 
