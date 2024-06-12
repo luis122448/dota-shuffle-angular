@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://dota-shuffle.luis122448.com/sitemap.xml
