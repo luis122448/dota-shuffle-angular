@@ -18,7 +18,7 @@ export class DialogEditPlayerComponent {
     this.formPlayer = this.formBuilder.group({
       id: [id, Validators.required],
       name: [name, Validators.required],
-      mmr: [mmr, Validators.required]
+      mmr: ['', [Validators.required,Validators.pattern('^[0-9 ]*$')]]
     });
   }
 
@@ -46,7 +46,7 @@ export class DialogEditPlayerComponent {
     }
     const id = this.formPlayer.get('id')?.value;
     const name = this.formPlayer.get('name')?.value;
-    const mmr = this.formPlayer.get('mmr')?.value;
+    const mmr = this.formPlayer.get('mmr')?.value.trim();
     this.playerDataSouce.editPlayer(id, name, mmr);
     this.dialogRef.close()
   }

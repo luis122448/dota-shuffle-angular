@@ -32,7 +32,7 @@ export class BasicDotaShuffleComponent {
   private BuildForm() {
     this.formPlayer = this.formBuilder.group({
       name: ['', Validators.required],
-      mmr: ['', Validators.required]
+      mmr: ['', [Validators.required,Validators.pattern('^[0-9 ]*$')]]
     });
   }
 
@@ -67,7 +67,7 @@ export class BasicDotaShuffleComponent {
     }
     try{
       const name = this.formPlayer.get('name')?.value;
-      const mmr = this.formPlayer.get('mmr')?.value;
+      const mmr = this.formPlayer.get('mmr')?.value.trim();
       this.playerDataSouce.addPlayer(name, mmr);
       console.log(this.playerDataSouce.getPlayers());
       this.total0 = this.playerDataSouce.getTotal(0);
