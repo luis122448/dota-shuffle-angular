@@ -8,8 +8,6 @@ COPY ./package*.json /home/app
 COPY ./tsconfig*.json /home/app
 COPY ./tailwind.config.js /home/app
 COPY ./server.ts /home/app
-COPY ./robots.txt /home/app
-COPY ./sitemap.xml /home/app
 RUN npm install
 
 COPY ./src /home/app/src
