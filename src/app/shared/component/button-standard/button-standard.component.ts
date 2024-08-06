@@ -5,7 +5,7 @@ faShuffle,
 faMedal} from '@fortawesome/free-solid-svg-icons';
 import { Colors, COLORS } from '../../model/color.model';
 import { ButtonOption } from '../../model/button-option.model';
-import { faDiscord } from '@fortawesome/free-brands-svg-icons';
+import { faDiscord, faSteam } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-button-standard',
@@ -81,6 +81,8 @@ export class ButtonStandardComponent {
         return faDiscord
       case 'medal':
         return faMedal
+      case 'steam':
+        return faSteam
       default:
         return faQuestion; // Puedes establecer un ícono predeterminado aquí si es necesario
     }

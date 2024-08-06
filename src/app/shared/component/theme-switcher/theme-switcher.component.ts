@@ -21,7 +21,7 @@ export class ThemeSwitcherComponent implements OnChanges{
     private defaultValuesService: DefaultValuesService
   ){
     this.renderer.addClass(this.document.body.parentElement, 'dark');
-    this.isDark = this.defaultValuesService.getCookie('dark') === 'true' ? true : false;
+    this.isDark = this.defaultValuesService.getCookieBoolean('dark');
     this.onChange(false)
   }
 

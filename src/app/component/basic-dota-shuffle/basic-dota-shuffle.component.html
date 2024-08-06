@@ -42,10 +42,21 @@
     <article class="space-y-2 items-center py-2">
       <div class="flex flex-row justify-between">
         <h2 class="text-inline-md font-semibold">No asignado</h2>
-        <h2 class="text-inline-md font-semibold"><span [ngClass]="{
-          'text-sky-800 dark:text-sky-700': countPlayersNotInTeam === 10,
-          'text-red-800 dark:text-red-700': countPlayersNotInTeam < 10
-        }">{{countPlayersNotInTeam}}</span> / 10</h2>
+        <h2 class="text-inline-md font-semibold">
+          <span
+            class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
+            *ngIf="countPlayersNotInTeam === 10"
+            >Full!</span
+          >
+          <span
+            [ngClass]="{
+              'text-sky-800 dark:text-sky-700': countPlayersNotInTeam === 10,
+              'text-red-800 dark:text-red-700': countPlayersNotInTeam < 10
+            }"
+            >{{ countPlayersNotInTeam }}</span
+          >
+          / 10
+        </h2>
       </div>
       <div
         cdkDropList
@@ -62,12 +73,12 @@
           ></app-item-player>
         </div>
       </div>
-      <div class="grid grid-cols-3 items-center">
-        <label for="total0" class="text-inline col-span-2">Total</label>
+      <div class="grid grid-cols-5 items-center">
+        <label for="total0" class="text-inline col-span-3">Total</label>
         <input
           name="total0"
           type="number"
-          class="input-default col-span-1 text-right"
+          class="input-default col-span-2 text-right"
           placeholder="total0"
           [(ngModel)]="total0"
           [disabled]="true"
@@ -76,9 +87,7 @@
     </article>
   </section>
   <section class="col-span-2 w-full flex flex-col">
-    <article>
-
-    </article>
+    <article></article>
     <article class="flex flex-row justify-around items-center h-20 w-auto">
       <app-button-standard
         [disabledBtn]="formPlayer.invalid"
@@ -103,7 +112,14 @@
     </article>
     <article class="h-full grid grid-cols-2 gap-x-6">
       <div class="space-y-2 items-center py-2">
-        <h2 class="text-inline-md font-semibold">Team N°1</h2>
+        <h2 class="text-inline-md font-semibold">
+          Team N°1
+          <span
+            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
+            *ngIf="diff < 0"
+            >First Win!</span
+          >
+        </h2>
         <div
           cdkDropList
           #Team1="cdkDropList"
@@ -119,23 +135,23 @@
             ></app-item-player>
           </div>
         </div>
-        <div class="grid grid-cols-3 items-center">
-          <label for="total1" class="text-inline col-span-2">Total</label>
+        <div class="grid grid-cols-5 items-center">
+          <label for="total1" class="text-inline col-span-3">Total</label>
           <input
             name="total1"
             type="number"
-            class="input-default col-span-1 text-right"
+            class="input-default col-span-2 text-right"
             placeholder="total1"
             [(ngModel)]="total1"
             [disabled]="true"
           />
         </div>
-        <div class="grid grid-cols-3 items-center" *ngIf="diff >= 0">
-          <label for="diff" class="text-inline col-span-2">Diferencia</label>
+        <div class="grid grid-cols-5 items-center" *ngIf="diff >= 0">
+          <label for="diff" class="text-inline col-span-3">Diference</label>
           <input
             name="diff"
             type="text"
-            class="input-default col-span-1 text-right"
+            class="input-default col-span-2 text-right"
             placeholder="diff"
             [(ngModel)]="diference"
             [disabled]="true"
@@ -143,7 +159,14 @@
         </div>
       </div>
       <div class="space-y-2 items-center py-2">
-        <h2 class="text-inline-md font-semibold">Team N°2</h2>
+        <h2 class="text-inline-md font-semibold">
+          Team N°2
+          <span
+            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
+            *ngIf="diff >= 0"
+            >First Win!</span
+          >
+        </h2>
         <div
           cdkDropList
           #Team2="cdkDropList"
@@ -159,23 +182,23 @@
             ></app-item-player>
           </div>
         </div>
-        <div class="grid grid-cols-3 items-center">
-          <label for="total2" class="text-inline col-span-2">Total</label>
+        <div class="grid grid-cols-5 items-center">
+          <label for="total2" class="text-inline col-span-3">Total</label>
           <input
             name="total2"
             type="number"
-            class="input-default col-span-1 text-right"
+            class="input-default col-span-2 text-right"
             placeholder="total2"
             [(ngModel)]="total2"
             [disabled]="true"
           />
         </div>
-        <div class="grid grid-cols-3 items-center" *ngIf="diff < 0">
-          <label for="diff" class="text-inline col-span-2">Diferencia</label>
+        <div class="grid grid-cols-5 items-center" *ngIf="diff < 0">
+          <label for="diff" class="text-inline col-span-3">Diference</label>
           <input
             name="diff"
             type="text"
-            class="input-default col-span-1 text-right"
+            class="input-default col-span-2 text-right"
             placeholder="diff"
             [(ngModel)]="diference"
             [disabled]="true"

@@ -16,7 +16,7 @@
       class="font-semibold text-center text-sm text-slate-700 dark:bg-none dark:text-gray-200"
     >
       Ingresa al Discord!
-      <br><span class="resalt-text">ZZZ</span>
+      <br /><span class="resalt-text">ZZZ</span>
     </h1>
     <p>
       <li class="text-inline-md text-left">
@@ -29,29 +29,28 @@
       </li>
     </p>
     <article class="flex flex-row justify-around space-x-6">
-
-    <app-button-standard
-    [optionBtn]="'discord'"
-    [typeBtn]="'button'"
-    [colorBtn]="'sky'"
-    class="pb-2"
-  >
-    <a
-      href="https://discord.gg/loz-zzz-afk-869348065063088149"
-      target="_blank"
-      class="font-bold"
-      >Join!</a
-    >
-  </app-button-standard>
-  <app-button-standard
-    [optionBtn]="'close'"
-    [typeBtn]="'button'"
-    [colorBtn]="'red'"
-    (click)="closeDialog()"
-    class="pb-2"
-  >
-    Close
-  </app-button-standard>
+      <a
+        href="https://discord.gg/loz-zzz-afk-869348065063088149"
+        target="_blank"
+        class="font-bold"
+      >
+        <app-button-standard
+          [optionBtn]="'discord'"
+          [typeBtn]="'button'"
+          [colorBtn]="'sky'"
+          class="pb-2"
+          >Join!</app-button-standard
+        ></a
+      >
+      <app-button-standard
+        [optionBtn]="'close'"
+        [typeBtn]="'button'"
+        [colorBtn]="'red'"
+        (click)="closeDialog()"
+        class="pb-2"
+      >
+        Close
+      </app-button-standard>
     </article>
   </section>
 </main>

@@ -1,6 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import { DiscordDialogComponent } from '../discord-dialog/discord-dialog.component';
 
 @Component({
   selector: 'app-footer',
