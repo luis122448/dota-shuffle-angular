@@ -10,6 +10,8 @@ import { ButtonOperacComponent } from './component/button-operac/button-operac.c
 import { DialogErrorAlertComponent } from './component/dialog-error-alert/dialog-error-alert.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DialogChangelogComponent } from './component/dialog-changelog/dialog-changelog.component';
+import { OrderByPipe } from './order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ThemeSwitcherComponent,
     FontIconComponent,
     ButtonOperacComponent,
-    DialogErrorAlertComponent
+    DialogErrorAlertComponent,
+    DialogChangelogComponent,
+    OrderByPipe
   ],
   imports: [
     CommonModule,
@@ -33,7 +37,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ThemeSwitcherComponent,
     FontIconComponent,
     ButtonOperacComponent,
-    DialogErrorAlertComponent
+    DialogErrorAlertComponent,
+    OrderByPipe
   ]
 })
 

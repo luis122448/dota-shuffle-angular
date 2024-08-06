@@ -41,8 +41,8 @@
     </article>
     <article class="space-y-2 items-center py-2">
       <div class="flex flex-row justify-between">
-        <h2 class="text-inline-md font-semibold">No asignado</h2>
-        <h2 class="text-inline-md font-semibold">
+        <h2 class="text-inline-md font-bold">No asignado</h2>
+        <h2 class="text-inline-md font-bold">
           <span
             class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
             *ngIf="countPlayersNotInTeam === 10"
@@ -74,7 +74,7 @@
         </div>
       </div>
       <div class="grid grid-cols-5 items-center">
-        <label for="total0" class="text-inline col-span-3">Total</label>
+        <label for="total0" class="text-inline-sm font-bold col-span-3">Total</label>
         <input
           name="total0"
           type="number"
@@ -136,7 +136,7 @@
           </div>
         </div>
         <div class="grid grid-cols-5 items-center">
-          <label for="total1" class="text-inline col-span-3">Total</label>
+          <label for="total1" class="text-inline-sm font-bold col-span-3">Total</label>
           <input
             name="total1"
             type="number"
@@ -147,7 +147,7 @@
           />
         </div>
         <div class="grid grid-cols-5 items-center" *ngIf="diff >= 0">
-          <label for="diff" class="text-inline col-span-3">Diference</label>
+          <label for="diff" class="text-inline-sm font-bold col-span-3">Diference</label>
           <input
             name="diff"
             type="text"
@@ -183,7 +183,7 @@
           </div>
         </div>
         <div class="grid grid-cols-5 items-center">
-          <label for="total2" class="text-inline col-span-3">Total</label>
+          <label for="total2" class="text-inline-sm font-bold col-span-3">Total</label>
           <input
             name="total2"
             type="number"
@@ -194,7 +194,7 @@
           />
         </div>
         <div class="grid grid-cols-5 items-center" *ngIf="diff < 0">
-          <label for="diff" class="text-inline col-span-3">Diference</label>
+          <label for="diff" class="text-inline-sm font-bold col-span-3">Diference</label>
           <input
             name="diff"
             type="text"

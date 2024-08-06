@@ -1,5 +1,5 @@
 <section class="header-default">
-  <nav class="grid h-full w-full grid-cols-2 border-gray-200">
+  <nav class="grid h-full w-full grid-cols-3 border-gray-200">
     <article class="col-span-1 my-auto ml-4">
       <a href="#" class="flex items-center">
         <img
@@ -9,14 +9,27 @@
         />
         <h1
           class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
-          >Dota Shuffle MMR</h1
         >
+          Dota Shuffle MMR
+        </h1>
       </a>
     </article>
     <article
-      class="space-x-4 col-span-1 my-auto flex w-full items-center justify-end px-4"
+      class="space-x-4 col-span-2 my-auto flex w-full items-center justify-end px-4"
     >
-      <div class="flex flex-row space-x-6">
+      <div class="flex flex-row space-x-4 xl:space-x-6">
+        <a
+          href="https://www.dota2.com/leaderboards/?l=english#americas"
+          target="_blank"
+        >
+          <app-button-standard
+            [optionBtn]="'ranking'"
+            [typeBtn]="'submit'"
+            [colorBtn]="'green'"
+          >
+            Top MMR
+          </app-button-standard>
+        </a>
         <app-button-standard
           [optionBtn]="'medal'"
           [typeBtn]="'submit'"

@@ -2,7 +2,9 @@ import { Component, Input } from '@angular/core';
 import { faSpinner,faFloppyDisk,faCalculator,faCircleLeft,faBroomBall,faCircleXmark,faNewspaper,
 faMagnifyingGlass,faQuestion,faTrashCan,faPenToSquare, IconDefinition, faPlus, faTrashArrowUp, faRightToBracket, faFileInvoice, faUpload, faDownload,
 faShuffle,
-faMedal} from '@fortawesome/free-solid-svg-icons';
+faMedal,
+faRankingStar,
+faBug} from '@fortawesome/free-solid-svg-icons';
 import { Colors, COLORS } from '../../model/color.model';
 import { ButtonOption } from '../../model/button-option.model';
 import { faDiscord, faSteam } from '@fortawesome/free-brands-svg-icons';
@@ -83,6 +85,10 @@ export class ButtonStandardComponent {
         return faMedal
       case 'steam':
         return faSteam
+      case 'ranking':
+        return faRankingStar
+      case 'bug':
+        return faBug
       default:
         return faQuestion; // Puedes establecer un ícono predeterminado aquí si es necesario
     }
