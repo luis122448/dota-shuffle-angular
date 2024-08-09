@@ -11,7 +11,9 @@ import { DialogErrorAlertComponent } from './component/dialog-error-alert/dialog
 import { DialogModule } from '@angular/cdk/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DialogChangelogComponent } from './component/dialog-changelog/dialog-changelog.component';
-import { OrderByPipe } from './order-by.pipe';
+import { MetricsDashboardComponent } from './component/metrics-dashboard/metrics-dashboard.component';
+import { NumberFormatPipe } from './pipe/number-format.pipe';
+import { OrderByPipe } from './pipe/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { OrderByPipe } from './order-by.pipe';
     ButtonOperacComponent,
     DialogErrorAlertComponent,
     DialogChangelogComponent,
-    OrderByPipe
+    OrderByPipe,
+    MetricsDashboardComponent,
+    NumberFormatPipe
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,9 @@ import { OrderByPipe } from './order-by.pipe';
     FontIconComponent,
     ButtonOperacComponent,
     DialogErrorAlertComponent,
-    OrderByPipe
+    OrderByPipe,
+    NumberFormatPipe,
+    MetricsDashboardComponent
   ]
 })
 

@@ -10,11 +10,11 @@
   </div>
   <div class="p-4 md:p-5">
     <ol
-      class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5"
+      class="relative border-s border-gray-400 dark:border-gray-600 ms-3.5 mb-4 md:mb-5"
     >
       <li class="mb-10 ms-8" *ngFor="let item of changeLog | orderBy : 'id' : 'desc'">
         <span
-          class="absolute flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full -start-3.5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600"
+          class="absolute flex items-center justify-center w-6 h-6 bg-gray-400 rounded-full -start-3.5 ring-8 ring-gray-200 dark:ring-gray-700 dark:bg-gray-600"
         >
           <fa-icon [icon]="faCalendar" size="xs" class="text-green"></fa-icon>
         </span>

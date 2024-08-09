@@ -45,7 +45,7 @@ export class DialogChangelogComponent {
       features: [
         'Add badges ( First Win!, Full! )',
         'Add top MMR button',
-        'Add SSR for the app',
+        'Add SSR for CEO',
       ]
     }
   ];

@@ -1,23 +1,22 @@
 <footer class="footer-default grid h-[60px] w-full grid-cols-2">
   <section class="col-span-1">
-    <label class="text-inline"
+    <label class="text-inline font-semibold"
       >Dota Shufle MMR - By
       <a
         href="https://t.me/luis122448"
         target="_blank"
-        class="font-medium text-blue-600 hover:underline dark:text-blue-500"
+        class="font-bold text-blue-600 hover:underline dark:text-blue-500"
         >luis122448</a
       >
     </label>
     <br />
-    <label class="text-inline">All rights reserved</label>
+    <label class="text-inline font-semibold">All rights reserved</label>
   </section>
-  <section class="flex flex-row space-x-2 h-full items-center">
+  <section class="flex flex-row space-x-4 h-full items-center">
     <span
-      class="my-auto text-xs text-slate-800 dark:text-gray-400 font-semibold"
+      class="my-auto text-md text-slate-800 dark:text-gray-400 font-semibold"
       >Stack
-      <span class="hidden lg:inline">Technologies </span>
-      :
+      <span class="lg:inline">Tech :</span>
     </span>
     <app-stack-tech [stackTechs]="stackTechs" [size]="8"></app-stack-tech>
   </section>

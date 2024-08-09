@@ -87,7 +87,6 @@
     </article>
   </section>
   <section class="col-span-2 w-full flex flex-col">
-    <article></article>
     <article class="flex flex-row justify-around items-center h-20 w-auto">
       <app-button-standard
         [disabledBtn]="formPlayer.invalid"
@@ -110,7 +109,7 @@
         >Delete All
       </app-button-standard>
     </article>
-    <article class="h-full grid grid-cols-2 gap-x-6">
+    <article class="grid grid-cols-2 gap-x-6">
       <div class="space-y-2 items-center py-2">
         <h2 class="text-inline-md font-semibold">
           Team N°1
@@ -205,6 +204,9 @@
           />
         </div>
       </div>
+    </article>
+    <article class="h-80 flex flex-col justify-around">
+      <app-metrics-dashboard></app-metrics-dashboard>
     </article>
   </section>
 </main>

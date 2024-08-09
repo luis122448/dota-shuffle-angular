@@ -3,8 +3,6 @@ import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
-  CdkDrag,
-  CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { DotaPlayerModel } from 'src/app/model/dota-player.model';
 import { DotaPlayerDataSource } from 'src/app/service/dota-player.service';
@@ -12,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogErrorAlertComponent } from 'src/app/shared/component/dialog-error-alert/dialog-error-alert.component';
 import { DefaultValuesService } from 'src/app/service/default-values.service';
+import { MetricsService } from 'src/app/service/metrics.service';
 
 @Component({
   selector: 'app-basic-dota-shuffle',
@@ -19,7 +18,6 @@ import { DefaultValuesService } from 'src/app/service/default-values.service';
   styleUrls: ['./basic-dota-shuffle.component.scss'],
 })
 export class BasicDotaShuffleComponent {
-
   playerDataSouce = DotaPlayerDataSource.getInstance();
   formPlayer!: FormGroup;
   total0: number = 0;
@@ -32,7 +30,7 @@ export class BasicDotaShuffleComponent {
   private BuildForm() {
     this.formPlayer = this.formBuilder.group({
       name: ['', Validators.required],
-      mmr: ['', [Validators.required,Validators.pattern('^[0-9 ]*$')]]
+      mmr: ['', [Validators.required, Validators.pattern('^[0-9 ]*$')]],
     });
   }
 
@@ -44,11 +42,13 @@ export class BasicDotaShuffleComponent {
   constructor(
     private formBuilder: FormBuilder,
     private defaultValuesService: DefaultValuesService,
-    private dialog: Dialog
+    private dialog: Dialog,
+    private metricsService: MetricsService
   ) {
     this.BuildForm();
-    const players : DotaPlayerModel[] = this.defaultValuesService.getLocalStorageValue('players')
-    if(players.length > 0){
+    const players: DotaPlayerModel[] =
+      this.defaultValuesService.getLocalStorageValue('players');
+    if (players.length > 0) {
       this.playerDataSouce.setPlayers(players);
     } else {
       this.playerDataSouce.onTest(true);
@@ -65,7 +65,7 @@ export class BasicDotaShuffleComponent {
       this.formPlayer.markAllAsTouched();
       return;
     }
-    try{
+    try {
       const name = this.formPlayer.get('name')?.value;
       const mmr = this.formPlayer.get('mmr')?.value.trim();
       this.playerDataSouce.addPlayer(name, mmr);
@@ -73,7 +73,10 @@ export class BasicDotaShuffleComponent {
       this.total0 = this.playerDataSouce.getTotal(0);
       this.BuildForm();
       this.onCalculate();
-      this.defaultValuesService.setLocalStorageValue('players', this.playerDataSouce.getPlayers());
+      this.defaultValuesService.setLocalStorageValue(
+        'players',
+        this.playerDataSouce.getPlayers()
+      );
     } catch (error: any) {
       this.dialog.open(DialogErrorAlertComponent, {
         width: '400px',
@@ -88,13 +91,19 @@ export class BasicDotaShuffleComponent {
   deletePlayer(id: number) {
     this.playerDataSouce.deletePlayer(id);
     this.onCalculate();
-    this.defaultValuesService.setLocalStorageValue('players', this.playerDataSouce.getPlayers());
+    this.defaultValuesService.setLocalStorageValue(
+      'players',
+      this.playerDataSouce.getPlayers()
+    );
   }
 
   onShuffle() {
     try {
       this.playerDataSouce.onShuffle();
       this.onCalculate();
+      this.metricsService.patchMetrics(2, 1).subscribe();
+      this.metricsService.patchMetrics(3, this.playerDataSouce.getTotalMMRPlayers()).subscribe();
+      this.metricsService.patchMetrics(4, this.playerDataSouce.getTotalTopPlayers(12000)).subscribe();
     } catch (error: any) {
       this.dialog.open(DialogErrorAlertComponent, {
         width: '400px',
@@ -111,7 +120,7 @@ export class BasicDotaShuffleComponent {
     this.onCalculate();
   }
 
-  onCalculate(){
+  onCalculate() {
     this.total0 = this.playerDataSouce.getTotal(0);
     this.total1 = this.playerDataSouce.getTotal(1);
     this.total2 = this.playerDataSouce.getTotal(2);
@@ -123,7 +132,10 @@ export class BasicDotaShuffleComponent {
   onDeleteAll() {
     this.playerDataSouce.deleteAll();
     this.onCalculate();
-    this.defaultValuesService.setLocalStorageValue('players', this.playerDataSouce.getPlayers());
+    this.defaultValuesService.setLocalStorageValue(
+      'players',
+      this.playerDataSouce.getPlayers()
+    );
   }
 
   drop(event: CdkDragDrop<DotaPlayerModel[]>) {
@@ -145,7 +157,10 @@ export class BasicDotaShuffleComponent {
         event.previousIndex,
         event.currentIndex
       );
-      this.playerDataSouce.movePlayer(movedItem.id, event.container.data[0].team);
+      this.playerDataSouce.movePlayer(
+        movedItem.id,
+        event.container.data[0].team
+      );
       this.onCalculate();
       console.log('Diferente contenedor');
     }

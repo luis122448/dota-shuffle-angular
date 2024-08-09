@@ -1,5 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { MetricsService } from 'src/app/service/metrics.service';
 import { DialogChangelogComponent } from 'src/app/shared/component/dialog-changelog/dialog-changelog.component';
 
 @Component({
@@ -10,10 +11,12 @@ import { DialogChangelogComponent } from 'src/app/shared/component/dialog-change
 export class LayoutDotaShuffleComponent {
 
   constructor(
-    private dialog: Dialog
+    private dialog: Dialog,
+    private metricsService: MetricsService
   ) {
-    this.dialog.open(DialogChangelogComponent, {
-      width: '480px',
-    });
+    this.metricsService.patchMetrics(1,1)
+    // this.dialog.open(DialogChangelogComponent, {
+    //   width: '480px',
+    // });
   }
 }

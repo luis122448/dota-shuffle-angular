@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutDotaShuffleComponent } from './layout/layout-dota-shuffle/layout-dota-shuffle.component';
@@ -17,6 +16,7 @@ import { DialogEditPlayerComponent } from './component/dialog-edit-player/dialog
 import { DiscordDialogComponent } from './component/discord-dialog/discord-dialog.component';
 import { TamaDialogComponent } from './component/tama-dialog/tama-dialog.component';
 import { CreditsDialogComponent } from './component/credits-dialog/credits-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { CreditsDialogComponent } from './component/credits-dialog/credits-dialo
     SharedModule,
     DragDropModule,
     DialogModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

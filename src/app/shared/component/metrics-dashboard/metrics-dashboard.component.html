@@ -1,0 +1,79 @@
+<main class="max-w-[480px] h-auto mx-auto">
+  <section class="h-10 fkex flex-col">
+    <h2 class="text-slate-800 dark:text-gray-200 font-bold text-xl text-center">
+      Transformation by the numbers
+    </h2>
+  </section>
+  <section
+    *ngIf="this.metrics().status === 1.0"
+    class="h-48 grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-8"
+  >
+    <article
+      class="flex flex-col justify-around items-center"
+      *ngFor="let item of metrics().list; let i = index"
+    >
+      <div
+        class="w-20 h-16 flex flex-row space-x-2 lg:space-x-4 justify-center items-center"
+      >
+        <fa-icon
+          [icon]="faIcons[i]"
+          size="xl"
+          class="text-sky-600 dark:text-sky-500"
+        ></fa-icon>
+        <div
+          class="w-auto h-16 flex items-center"
+          [ngSwitch]="item.metrics_type"
+        >
+          <h3 *ngSwitchCase="'INTEGER'"
+            class="text-slate-800 dark:text-gray-200 text-xl font-extrabold text-nowrap"
+          >
+            {{ item.value_integer | numberFormat }}
+          </h3>
+          <h3 *ngSwitchCase="'FLOAT'"
+            class="text-slate-800 dark:text-gray-200 text-xl font-extrabold text-nowrap"
+          >
+            {{ item.value_float | numberFormat }}
+          </h3>
+        </div>
+      </div>
+      <div class="w-20 h-auto">
+        <p class="text-slate-800 dark:text-gray-300 text-sm text-center">
+          {{ item.name }}
+        </p>
+      </div>
+    </article>
+  </section>
+  <section
+    *ngIf="this.metrics().status != 1.0"
+    class="h-48 grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-8"
+  >
+    <article
+      class="flex flex-col justify-around items-center"
+      *ngFor="let item of faIcons; let i = index"
+    >
+      <div
+        role="status"
+        class="animate-pulse w-20 h-16 flex flex-row space-x-2 lg:space-x-4 justify-center items-center"
+      >
+        <fa-icon
+          [icon]="faIcons[i]"
+          size="xl"
+          class="text-sky-600 dark:text-sky-500"
+        ></fa-icon>
+        <div class="w-auto h-16 flex flex-row items-center">
+          <div
+            class="h-5 mx-auto bg-gray-300 rounded-full dark:bg-gray-700 w-12"
+          ></div>
+        </div>
+      </div>
+      <div class="w-20 h-auto">
+        <div
+          class="h-2.5 mx-auto bg-gray-300 rounded-full dark:bg-gray-700 max-w-[80px] mb-1.5"
+        ></div>
+        <div
+          class="h-2.5 mx-auto bg-gray-300 rounded-full dark:bg-gray-700 max-w-[50px]"
+        ></div>
+      </div>
+    </article>
+  </section>
+</main>

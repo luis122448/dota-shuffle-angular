@@ -172,6 +172,27 @@ export class DotaPlayerDataSource {
     return terceBestCombination!;
   }
 
+  public getTotalTopPlayers(topMMR: number): number {
+    const players = this.data.value;
+    const totalTopPlayers = players.reduce((total, player) => {
+      if (player.mmr >= topMMR) {
+        return total + 1;
+      } else {
+        return total;
+      }
+    }, 0);
+    return totalTopPlayers;
+  }
+
+  public getTotalMMRPlayers(): number {
+    const players = this.data.value;
+    const totalMMRPlayers = players.reduce(
+      (total, player) => total + player.mmr,
+      0
+    );
+    return totalMMRPlayers;
+  }
+
   constructor() {}
 
   public static getInstance(): DotaPlayerDataSource {
