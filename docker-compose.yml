@@ -1,7 +1,7 @@
 version: '3.8'  # Puedes ajustar la versión según la que desees usar
 
 services:
-  postgres:
+  app:
     container_name: dota-shuffle-angular
     build:
       context: .

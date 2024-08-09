@@ -3,6 +3,14 @@ FROM node:21-alpine AS build
 
 WORKDIR /home/app
 
+# Set environment variables
+ARG API_URL
+ARG WS_URL
+
+# Set environment variables for the build process
+ENV API_URL: $API_URL
+ENV WS_URL: $WS_URL
+
 COPY ./angular.json /home/app
 COPY ./package*.json /home/app
 COPY ./tsconfig*.json /home/app
@@ -11,7 +19,12 @@ COPY ./server.ts /home/app
 RUN npm install
 
 COPY ./src /home/app/src
-RUN npm run build:ssr
+
+# Replace environment placeholders
+RUN sed -i "s#\\[API_URL\\]#$API_URL#g" /home/app/src/environments/environment.ts
+RUN sed -i "s#\\[WS_URL\\]#$WS_URL#g" /home/app/src/environments/environment.ts
+
+RUN npm run build:ssr --prod
 
 # Serve stage
 FROM node:21-alpine AS serve
@@ -24,7 +37,6 @@ COPY --from=build /home/app/package*.json /home/app
 
 RUN npm install --only=production
 
-# Expose port 4000
 EXPOSE 80
 
 # Command to run the app with SSR
