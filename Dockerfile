@@ -27,7 +27,7 @@ RUN sed -i "s#\\[WS_URL\\]#$WS_URL#g" /home/app/src/environments/environment.ts
 RUN npm run build:ssr --prod
 
 # Serve stage
-FROM node:21-alpine AS serve
+FROM node:22.6 AS serve
 
 WORKDIR /home/app
 
