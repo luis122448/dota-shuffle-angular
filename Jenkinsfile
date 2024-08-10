@@ -3,23 +3,12 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'dota-shuffle-angular-app'
+        API_URL = credentials('dota-shuffle-angular')
+        WS_URL = credentials('dota-shuffle-angular')
+        PORT = credentials('dota-shuffle-angular')
     }
 
     stages {
-
-        stage('Prepare Environment') {
-            steps {
-                withCredentials([string(credentialsId: 'JENKINS_SECRETS', variable: 'SECRETS')]) {
-                    script {
-                        def envVars = SECRETS.split('\n')
-                        envVars.each { line ->
-                            def parts = line.split('=')
-                            env[parts[0]] = parts[1]
-                        }
-                    }
-                }
-            }
-        }
 
         stage('Checkout') {
             steps {
