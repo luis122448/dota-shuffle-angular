@@ -10,11 +10,15 @@ pipeline {
 
     stages {
 
-        stage('Debug Variables') {
-          steps {
-              writeFile file: 'env-debug.txt', text: "API_URL=${env.API_URL}\nWS_URL=${env.WS_URL}\nPORT=${env.PORT}"
-              sh 'cat env-debug.txt'
-          }
+        stage('Create .env file') {
+            steps {
+                writeFile file: '.env', text: """\
+API_URL=${env.API_URL}
+WS_URL=${env.WS_URL}
+PORT=${env.PORT}
+"""
+                sh 'cat .env'
+            }
         }
 
         stage('Checkout') {
