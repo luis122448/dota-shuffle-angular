@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'git@github.com:luis122448/dota-shuffle.git'
+                git branch: 'developer', url: 'git@github.com:luis122448/dota-shuffle.git'
             }
         }
 
