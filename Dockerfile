@@ -1,5 +1,5 @@
 # Build stage
-FROM node:21-alpine AS build
+FROM node:22-alpine AS build
 
 WORKDIR /home/app
 
@@ -8,8 +8,8 @@ ARG API_URL
 ARG WS_URL
 
 # Set environment variables for the build process
-ENV API_URL: $API_URL
-ENV WS_URL: $WS_URL
+ENV API_URL=$API_URL
+ENV WS_URL=$WS_URL
 
 COPY ./angular.json /home/app
 COPY ./package*.json /home/app
@@ -27,7 +27,7 @@ RUN sed -i "s#\\[WS_URL\\]#$WS_URL#g" /home/app/src/environments/environment.ts
 RUN npm run build:ssr --prod
 
 # Serve stage
-FROM node:22.6 AS serve
+FROM node:22-alpine AS serve
 
 WORKDIR /home/app
 
@@ -40,4 +40,4 @@ RUN npm install --only=production
 EXPOSE 4203
 
 # Command to run the app with SSR
-CMD ["node", "dist/dota-shuffle/server/main.js"]
+CMD ["node", "dist/dota-shuffle-angular/server/main.js"]

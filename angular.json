@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dota-shuffle": {
+    "dota-shuffle-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/dota-shuffle/browser",
+            "outputPath": "dist/dota-shuffle-angular/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "dota-shuffle:build:production"
+              "browserTarget": "dota-shuffle-angular:build:production"
             },
             "development": {
-              "browserTarget": "dota-shuffle:build:development"
+              "browserTarget": "dota-shuffle-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dota-shuffle:build"
+            "browserTarget": "dota-shuffle-angular:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/dota-shuffle/server",
+            "outputPath": "dist/dota-shuffle-angular/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -130,12 +130,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "dota-shuffle:build:development",
-              "serverTarget": "dota-shuffle:server:development"
+              "browserTarget": "dota-shuffle-angular:build:development",
+              "serverTarget": "dota-shuffle-angular:server:development"
             },
             "production": {
-              "browserTarget": "dota-shuffle:build:production",
-              "serverTarget": "dota-shuffle:server:production"
+              "browserTarget": "dota-shuffle-angular:build:production",
+              "serverTarget": "dota-shuffle-angular:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -149,12 +149,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "dota-shuffle:build:production",
-              "serverTarget": "dota-shuffle:server:production"
+              "browserTarget": "dota-shuffle-angular:build:production",
+              "serverTarget": "dota-shuffle-angular:server:production"
             },
             "development": {
-              "browserTarget": "dota-shuffle:build:development",
-              "serverTarget": "dota-shuffle:server:development"
+              "browserTarget": "dota-shuffle-angular:build:development",
+              "serverTarget": "dota-shuffle-angular:server:development"
             }
           },
           "defaultConfiguration": "production"
