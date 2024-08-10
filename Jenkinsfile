@@ -14,22 +14,20 @@ pipeline {
 
         stage('Build') {
             steps {
-                script {
-                    def app = docker.build(DOCKER_IMAGE)
-                }
+                sh "docker build -t ${DOCKER_IMAGE} ."
             }
         }
 
         stage('Test') {
             steps {
-                sh 'docker-compose run app npm test'
+                sh 'docker compose run app npm test'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker-compose down'
-                sh 'docker-compose up -d'
+                sh 'docker compose down'
+                sh 'docker compose up -d'
             }
         }
     }
