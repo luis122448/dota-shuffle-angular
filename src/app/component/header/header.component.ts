@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { DiscordDialogComponent } from '../discord-dialog/discord-dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
-import { TamaDialogComponent } from '../tama-dialog/tama-dialog.component';
 import { CreditsDialogComponent } from '../credits-dialog/credits-dialog.component';
 
 @Component({
@@ -29,14 +28,14 @@ export class HeaderComponent {
   openDialogDicord(){
     this.dialog.open(DiscordDialogComponent, {
       width: '600px',
-      height: '420px'
+      height: '440px'
     })
   }
 
   openDialogCredits(){
     this.dialog.open(CreditsDialogComponent, {
       width: '600px',
-      height: '420px'
+      height: '480px'
     })
   }
 

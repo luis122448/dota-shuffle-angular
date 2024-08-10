@@ -14,7 +14,6 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DialogEditPlayerComponent } from './component/dialog-edit-player/dialog-edit-player.component';
 import { DiscordDialogComponent } from './component/discord-dialog/discord-dialog.component';
-import { TamaDialogComponent } from './component/tama-dialog/tama-dialog.component';
 import { CreditsDialogComponent } from './component/credits-dialog/credits-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -28,7 +27,6 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     DialogEditPlayerComponent,
     DiscordDialogComponent,
-    TamaDialogComponent,
     CreditsDialogComponent
   ],
   imports: [

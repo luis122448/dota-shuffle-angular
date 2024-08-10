@@ -47,6 +47,18 @@ export class DialogChangelogComponent {
         'Add top MMR button',
         'Add SSR for CEO',
       ]
+    },
+    {
+      id: 4,
+      title: 'Implementing Metrics',
+      date: new Date('2024-08-06'),
+      description: 'Third version of the app with new badges, top MMR button, and SSR support.',
+      version: '1.2.0',
+      features: [
+        'Add badges ( Top MMR )',
+        'Add metrics for CEO',
+        'Add SSR for CEO',
+      ]
     }
   ];
   lastIdChangeLog = this.changeLog.length;

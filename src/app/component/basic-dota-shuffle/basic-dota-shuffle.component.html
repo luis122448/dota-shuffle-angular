@@ -1,5 +1,5 @@
 <main
-  class="h-full px-4 w-auto grid grid-cols-3 gap-x-6 bg-slate-100 dark:bg-slate-900 dark:text-gray-400 m-auto"
+  class="h-full px-4 w-auto grid grid-cols-3 gap-x-6 bg-slate-100 dark:bg-slate-900 dark:text-gray-400 m-auto lg:px-6 xl:px-8"
 >
   <section class="col-span-1 flex flex-col justify-start item">
     <article class="px-4 py-2 h-32 w-auto mt-8">
@@ -39,7 +39,7 @@
         </div>
       </form>
     </article>
-    <article class="space-y-2 items-center py-2">
+    <article class="space-y-2 items-center py-2 max-w-[320px] mx-auto">
       <div class="flex flex-row justify-between">
         <h2 class="text-inline-md font-bold">No asignado</h2>
         <h2 class="text-inline-md font-bold">
@@ -87,7 +87,7 @@
     </article>
   </section>
   <section class="col-span-2 w-full flex flex-col">
-    <article class="flex flex-row justify-around items-center h-20 w-auto">
+    <article class="flex flex-row justify-around items-center h-16 w-auto">
       <app-button-standard
         [disabledBtn]="formPlayer.invalid"
         optionBtn="shuffle"
@@ -109,7 +109,7 @@
         >Delete All
       </app-button-standard>
     </article>
-    <article class="grid grid-cols-2 gap-x-6">
+    <article class="grid grid-cols-2 gap-x-6 lg:gap-x-8 xl:gap-x-10 max-w-[720px] mx-auto">
       <div class="space-y-2 items-center py-2">
         <h2 class="text-inline-md font-semibold">
           Team N°1
@@ -205,7 +205,7 @@
         </div>
       </div>
     </article>
-    <article class="h-80 flex flex-col justify-around">
+    <article class="h-72 flex flex-col justify-around">
       <app-metrics-dashboard></app-metrics-dashboard>
     </article>
   </section>
