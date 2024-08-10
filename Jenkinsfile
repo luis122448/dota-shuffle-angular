@@ -10,6 +10,13 @@ pipeline {
 
     stages {
 
+        stage('Debug Variables') {
+          steps {
+              writeFile file: 'env-debug.txt', text: "API_URL=${env.API_URL}\nWS_URL=${env.WS_URL}\nPORT=${env.PORT}"
+              sh 'cat env-debug.txt'
+          }
+        }
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'git@github.com:luis122448/dota-shuffle-angular.git'
