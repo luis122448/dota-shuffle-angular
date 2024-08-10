@@ -29,16 +29,15 @@ PORT=${env.PORT}
 
         stage('Build') {
             steps {
-                echo "Building with API_URL=${env.API_URL}, WS_URL=${env.WS_URL}, PORT=${env.PORT}"
                 sh "docker build -t ${DOCKER_IMAGE} ."
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "Running application on PORT=${env.PORT}"
                 sh 'docker compose down'
                 sh 'docker compose up -d'
+                sh 'docker compose ps'
             }
         }
     }
