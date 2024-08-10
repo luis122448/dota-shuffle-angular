@@ -20,7 +20,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'docker compose run app npm test'
+                sh 'docker compose run --rm dota-shuffle-angular npm test'
             }
         }
 
