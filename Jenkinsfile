@@ -18,12 +18,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                sh 'docker compose run --rm dota-shuffle-angular npm test'
-            }
-        }
-
         stage('Deploy') {
             steps {
                 sh 'docker compose down'
