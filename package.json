@@ -1,5 +1,5 @@
 {
-  "name": "dota-shuffle",
+  "name": "dota-shuffle-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:ssr": "ng run dota-shuffle:serve-ssr",
-    "serve:ssr": "node dist/dota-shuffle/server/main.js",
-    "build:ssr": "ng build && ng run dota-shuffle:server",
-    "prerender": "ng run dota-shuffle:prerender"
+    "dev:ssr": "ng run dota-shuffle-angular:serve-ssr",
+    "serve:ssr": "node dist/dota-shuffle-angular/server/main.js",
+    "build:ssr": "ng build && ng run dota-shuffle-angular:server",
+    "prerender": "ng run dota-shuffle-angular:prerender"
   },
   "private": true,
   "dependencies": {
