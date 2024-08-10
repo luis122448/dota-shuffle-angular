@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    triggers {
+        pollSCM('* * * * *')
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: false, branchFilterType: 'NameBasedFilter', sourceBranchRegex: 'main')
+    }
+
     environment {
         DOCKER_IMAGE = 'dota-shuffle-angular-app'
         API_URL = credentials('dota-shuffle-angular')
