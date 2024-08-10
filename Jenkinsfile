@@ -3,7 +3,7 @@ pipeline {
 
     triggers {
         pollSCM('* * * * *')
-        gitlab(triggerOnPush: true, triggerOnMergeRequest: false, branchFilterType: 'NameBasedFilter', sourceBranchRegex: 'main')
+        githubPush()
     }
 
     environment {
