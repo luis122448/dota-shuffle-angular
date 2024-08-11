@@ -8,12 +8,13 @@ import { MetricsModel } from '../model/metrics.model';
 })
 export class WebSocketService {
 
-  WS_URL = environment.WS_URL + '/metrics/websocket/1';
+  WS_URL = environment.WS_URL + '/app/metrics/websocket/1';
 
   private webSocket!: WebSocket;
   private reconnectAttempts: number = 0;
   private maxReconnectAttempts: number = 5;
   private reconnectInterval: number = 2000;
+
   metrics = signal<ApiResponseList<MetricsModel>>({
     status: 0.0,
     message: '',
