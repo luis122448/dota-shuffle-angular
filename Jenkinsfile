@@ -15,6 +15,12 @@ pipeline {
 
     stages {
 
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+
         stage('Create .env file') {
             steps {
                 writeFile file: '.env', text: """\
