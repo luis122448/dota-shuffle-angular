@@ -1,8 +1,6 @@
 services:
   app:
     container_name: dota-shuffle-angular
-    env_file:
-      - ./.env
     build:
       context: .
       dockerfile: Dockerfile
