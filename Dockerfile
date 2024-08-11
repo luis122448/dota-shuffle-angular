@@ -8,8 +8,9 @@ ARG API_URL
 ARG WS_URL
 
 # Set environment variables for the build process
-ENV API_URL=$API_URL
-ENV WS_URL=$WS_URL
+ENV API_URL="https://metrics.luis122448.dev"
+ENV WS_URL="wss://metrics.luis122448.dev"
+
 
 COPY ./angular.json /home/app
 COPY ./package*.json /home/app
