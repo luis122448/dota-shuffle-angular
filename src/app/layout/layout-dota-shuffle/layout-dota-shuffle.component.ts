@@ -15,8 +15,9 @@ export class LayoutDotaShuffleComponent {
     private metricsService: MetricsService
   ) {
     this.metricsService.patchMetrics(1,1)
-    // this.dialog.open(DialogChangelogComponent, {
-    //   width: '480px',
-    // });
+    this.dialog.open(DialogChangelogComponent, {
+      width: '480px',
+      height: '600px',
+    });
   }
 }

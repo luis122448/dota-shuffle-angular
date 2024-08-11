@@ -51,13 +51,13 @@ export class DialogChangelogComponent {
     {
       id: 4,
       title: 'Implementing Metrics',
-      date: new Date('2024-08-06'),
+      date: new Date('2024-08-11'),
       description: 'Third version of the app with new badges, top MMR button, and SSR support.',
-      version: '1.2.0',
+      version: '1.3.0',
       features: [
-        'Add badges ( Top MMR )',
-        'Add metrics for CEO',
-        'Add SSR for CEO',
+        'Update styles for accessibility and responsiveness',
+        'Add metrics for tracking',
+        'Update icons and buttons',
       ]
     }
   ];
