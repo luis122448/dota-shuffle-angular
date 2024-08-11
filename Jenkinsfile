@@ -18,8 +18,8 @@ pipeline {
         stage('Create .env file') {
             steps {
                 writeFile file: '.env', text: """\
-API_URL=${env.API_URL}
-WS_URL=${env.WS_URL}
+API_URL=https://metrics.luis122448.dev
+WS_URL=wss://metrics.luis122448.dev
 PORT=${env.PORT}
 """
                 sh 'cat .env'
