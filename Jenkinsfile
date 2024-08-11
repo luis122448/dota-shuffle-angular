@@ -27,14 +27,18 @@ pipeline {
             }
         }
 
+
         stage('Create .env file') {
             steps {
-                writeFile file: '.env', text: """\
-API_URL=${env.API_URL}
-WS_URL=${env.WS_URL}
-PORT=${env.PORT}
-"""
-                sh 'cat .env'
+                sh '''
+                [ -f .env ] && rm .env
+
+                echo "API_URL=${API_URL}" > .env
+                echo "WS_URL=${WS_URL}" >> .env
+                echo "PORT=${PORT}" >> .env
+
+                cat .env
+                '''
             }
         }
 
