@@ -27,20 +27,19 @@ pipeline {
             }
         }
 
+        // stage('Create .env file') {
+        //     steps {
+        //         sh '''
+        //         [ -f .env ] && rm .env
 
-        stage('Create .env file') {
-            steps {
-                sh '''
-                [ -f .env ] && rm .env
+        //         echo "API_URL=${API_URL}" > .env
+        //         echo "WS_URL=${WS_URL}" >> .env
+        //         echo "PORT=${PORT}" >> .env
 
-                echo "API_URL=${API_URL}" > .env
-                echo "WS_URL=${WS_URL}" >> .env
-                echo "PORT=${PORT}" >> .env
-
-                cat .env
-                '''
-            }
-        }
+        //         cat .env
+        //         '''
+        //     }
+        // }
 
         stage('Build') {
             steps {
