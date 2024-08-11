@@ -21,6 +21,12 @@ pipeline {
             }
         }
 
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'git@github.com:luis122448/dota-shuffle-angular.git'
+            }
+        }
+
         stage('Create .env file') {
             steps {
                 writeFile file: '.env', text: """\
@@ -29,12 +35,6 @@ WS_URL=${env.WS_URL}
 PORT=${env.PORT}
 """
                 sh 'cat .env'
-            }
-        }
-
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'git@github.com:luis122448/dota-shuffle-angular.git'
             }
         }
 
