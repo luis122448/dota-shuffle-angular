@@ -8,8 +8,8 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'dota-shuffle-angular-app'
-        API_URL = "https://metrics.luis122448.dev"
-        WS_URL = "wss://metrics.luis122448.dev"
+        API_URL = credentials('dota-shuffle-angular')
+        WS_URL = credentials('dota-shuffle-angular')
         PORT = credentials('dota-shuffle-angular')
     }
 
@@ -18,8 +18,8 @@ pipeline {
         stage('Create .env file') {
             steps {
                 writeFile file: '.env', text: """\
-API_URL="https://metrics.luis122448.dev"
-WS_URL="wss://metrics.luis122448.dev"
+API_URL=${env.API_URL}
+WS_URL=${env.WS_URL}
 PORT=${env.PORT}
 """
                 sh 'cat .env'

@@ -1,14 +1,16 @@
 services:
   app:
     container_name: dota-shuffle-angular
+    env_file:
+      - ./.env
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        API_URL: "https://metrics.luis122448.dev"
-        WS_URL: "wss://metrics.luis122448.dev"
+        API_URL: $API_URL
+        WS_URL: $WS_URL
     environment:
-        API_URL: "https://metrics.luis122448.dev"
-        WS_URL: "wss://metrics.luis122448.dev"
+        API_URL: $API_URL
+        WS_URL: $WS_URL
     ports:
       - "4203:4203"
