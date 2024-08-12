@@ -23,7 +23,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'git@github.com:luis122448/dota-shuffle-angular.git'
+                git branch: 'hotfix', url: 'git@github.com:luis122448/dota-shuffle-angular.git'
             }
         }
 
