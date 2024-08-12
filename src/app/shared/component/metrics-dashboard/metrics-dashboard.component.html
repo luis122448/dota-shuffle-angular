@@ -1,4 +1,4 @@
-<main class="max-w-[480px] h-auto mx-auto">
+<main class="min-w-[380px] max-w-[480px] h-auto mx-auto">
   <section class="h-10 fkex flex-col">
     <h2 class="text-slate-800 dark:text-gray-200 font-bold text-xl text-center">
       Transformation by the numbers
@@ -6,7 +6,7 @@
   </section>
   <section
     *ngIf="this.metrics().status === 1.0"
-    class="h-48 grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-8"
+    class="h-44 grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-8"
   >
     <article
       class="flex flex-col justify-around items-center"
@@ -45,7 +45,7 @@
   </section>
   <section
     *ngIf="this.metrics().status != 1.0"
-    class="h-48 grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-8"
+    class="h-44 grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-8"
   >
     <article
       class="flex flex-col justify-around items-center"

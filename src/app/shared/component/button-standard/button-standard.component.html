@@ -1,12 +1,13 @@
 <button
   [type]="typeBtn"
   [ngClass]="colors"
-  class="min-w-[100px] flex flex-nowrap justify-center space-x-2 rounded px-4 py-1 text-sm font-medium mx-auto"
+  [ngClass]="responsiveBtn ? 'w-auto' : 'min-w-[100px]'"
+  class="flex flex-nowrap justify-center space-x-2 rounded px-4 py-1 text-sm font-medium mx-auto"
 >
   <section>
     <fa-icon [icon]="getIcon(optionBtn)"></fa-icon>
   </section>
-  <section class="">
+  <section [ngClass]="responsiveBtn ? 'hidden sm:flex' : ''">
     <ng-content></ng-content>
   </section>
 </button>

@@ -1,52 +1,62 @@
 <section class="header-default">
-  <nav class="grid h-full w-full grid-cols-3 border-gray-200">
-    <article class="col-span-1 my-auto ml-4">
+  <nav class="grid h-full w-full grid-cols-8 border-gray-200">
+    <article class="col-span-3 my-auto ml-1 sm:ml-4">
       <a href="#" class="flex items-center">
         <img
           src="../../../assets/image/icon/dota-icon.png"
-          class="mr-3 h-10 w-10 rounded-md"
+          class="mr-1 sm:mr-3 h-10 w-10 rounded-md"
           alt="Dota 2 Icon"
         />
         <h1
-          class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
+          class="self-center tracking-tight sm:tracking-normal whitespace-nowrap text-xl font-semibold dark:text-white"
         >
-          Dota Shuffle MMR
+          Dota Shuffle
+          <span
+            role="status"
+            class="hidden sm:inline text-sky-600 dark:text-sky-500 font-bold"
+            >MMR</span
+          >
         </h1>
       </a>
     </article>
     <article
-      class="space-x-4 col-span-2 my-auto flex w-full items-center justify-end px-4"
+      class="col-span-4 flex flex-row space-x-2 sm:space-x-4 my-auto w-full items-center justify-end px-4"
     >
-      <div class="flex flex-row space-x-4 xl:space-x-6">
-        <a
-          href="https://www.dota2.com/leaderboards/?l=english#americas"
-          target="_blank"
-        >
-          <app-button-standard
-            [optionBtn]="'ranking'"
-            [typeBtn]="'submit'"
-            [colorBtn]="'green'"
-          >
-            Top MMR
-          </app-button-standard>
-        </a>
+      <a
+        href="https://www.dota2.com/leaderboards/?l=english#americas"
+        target="_blank"
+      >
         <app-button-standard
-          [optionBtn]="'medal'"
+          [optionBtn]="'ranking'"
           [typeBtn]="'submit'"
-          [colorBtn]="'blue'"
-          (click)="openDialogCredits()"
+          [colorBtn]="'green'"
+          [responsiveBtn]="true"
         >
-          Credits
+          Top MMR
         </app-button-standard>
-        <app-button-standard
-          [optionBtn]="'discord'"
-          [typeBtn]="'submit'"
-          [colorBtn]="'blue'"
-          (click)="openDialogDicord()"
-        >
-          Discord
-        </app-button-standard>
-      </div>
+      </a>
+      <app-button-standard
+        [optionBtn]="'medal'"
+        [typeBtn]="'submit'"
+        [colorBtn]="'blue'"
+        [responsiveBtn]="true"
+        (click)="openDialogCredits()"
+      >
+        Credits
+      </app-button-standard>
+      <app-button-standard
+        [optionBtn]="'discord'"
+        [typeBtn]="'submit'"
+        [colorBtn]="'blue'"
+        [responsiveBtn]="true"
+        (click)="openDialogDicord()"
+      >
+        Discord
+      </app-button-standard>
+    </article>
+    <article
+      class="col-span-1 flex flex-row justify-end items-center sm:px-2 lg:px-4"
+    >
       <app-theme-switcher></app-theme-switcher>
     </article>
   </nav>

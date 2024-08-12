@@ -1,13 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { faSpinner,faFloppyDisk,faCalculator,faCircleLeft,faBroomBall,faCircleXmark,faNewspaper,
 faMagnifyingGlass,faQuestion,faTrashCan,faPenToSquare, IconDefinition, faPlus, faTrashArrowUp, faRightToBracket, faFileInvoice, faUpload, faDownload,
-faShuffle,
-faMedal,
-faRankingStar,
-faBug} from '@fortawesome/free-solid-svg-icons';
+faShuffle,faMedal,faRankingStar,faBug,faCamera} from '@fortawesome/free-solid-svg-icons';
+import { faDiscord, faSteam } from '@fortawesome/free-brands-svg-icons';
 import { Colors, COLORS } from '../../model/color.model';
 import { ButtonOption } from '../../model/button-option.model';
-import { faDiscord, faSteam } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-button-standard',
@@ -20,6 +17,7 @@ export class ButtonStandardComponent {
   @Input() optionBtn: ButtonOption = ''
   @Input() typeBtn: 'reset' | 'submit' | 'button' = 'button';
   @Input() colorBtn: Colors = 'green';
+  @Input() responsiveBtn = false;
 
   mapColors = COLORS;
 
@@ -27,10 +25,11 @@ export class ButtonStandardComponent {
 
   get colors() {
     const colors = this.mapColors[this.colorBtn];
-    if (colors) {
-      return colors;
+    if (this.responsiveBtn) {
+      return { ...colors, 'w-auto': true };
+    } else {
+      return { ...colors, 'sm:min-w-[80px] md:min-w-[100px]': true };
     }
-    return {};
   }
 
   getIcon(optionBtn: string): IconDefinition {
@@ -89,6 +88,8 @@ export class ButtonStandardComponent {
         return faRankingStar
       case 'bug':
         return faBug
+      case 'capture':
+        return faCamera
       default:
         return faQuestion; // Puedes establecer un ícono predeterminado aquí si es necesario
     }

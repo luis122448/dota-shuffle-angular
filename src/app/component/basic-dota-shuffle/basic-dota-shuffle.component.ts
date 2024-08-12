@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -11,6 +11,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { DialogErrorAlertComponent } from 'src/app/shared/component/dialog-error-alert/dialog-error-alert.component';
 import { DefaultValuesService } from 'src/app/service/default-values.service';
 import { MetricsService } from 'src/app/service/metrics.service';
+import { NgxCaptureService } from 'ngx-capture';
 
 @Component({
   selector: 'app-basic-dota-shuffle',
@@ -18,13 +19,14 @@ import { MetricsService } from 'src/app/service/metrics.service';
   styleUrls: ['./basic-dota-shuffle.component.scss'],
 })
 export class BasicDotaShuffleComponent {
+  @ViewChild('captureArea', { static: true }) captureArea!: ElementRef;
   playerDataSouce = DotaPlayerDataSource.getInstance();
   formPlayer!: FormGroup;
   total0: number = 0;
   total1: number = 0;
   total2: number = 0;
   diff: number = 0;
-  diference: string = '';
+  difference: string = '';
   countPlayersNotInTeam: number = 0;
 
   private BuildForm() {
@@ -43,7 +45,8 @@ export class BasicDotaShuffleComponent {
     private formBuilder: FormBuilder,
     private defaultValuesService: DefaultValuesService,
     private dialog: Dialog,
-    private metricsService: MetricsService
+    private metricsService: MetricsService,
+    private captureService: NgxCaptureService
   ) {
     this.BuildForm();
     const players: DotaPlayerModel[] =
@@ -97,6 +100,15 @@ export class BasicDotaShuffleComponent {
     );
   }
 
+  onCapture() {
+    this.captureService.getImage(this.captureArea.nativeElement, true).subscribe((img) => {
+      const link = document.createElement('a');
+      link.href = img;
+      link.download = 'emparejamiento.png';
+      link.click();
+    });
+  }
+
   onShuffle() {
     try {
       this.playerDataSouce.onShuffle();
@@ -125,7 +137,7 @@ export class BasicDotaShuffleComponent {
     this.total1 = this.playerDataSouce.getTotal(1);
     this.total2 = this.playerDataSouce.getTotal(2);
     this.diff = this.total1 - this.total2;
-    this.diference = '+' + Math.abs(this.diff) + ' MMR';
+    this.difference = '+' + Math.abs(this.diff) + ' MMR';
     this.countPlayersNotInTeam = this.playerDataSouce.countPlayersNotInTeam();
   }
 

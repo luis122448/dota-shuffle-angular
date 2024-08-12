@@ -23,7 +23,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'git@github.com:luis122448/dota-shuffle-angular.git'
+                git branch: 'developer', url: 'git@github.com:luis122448/dota-shuffle-angular.git'
             }
         }
 
@@ -56,9 +56,9 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            sh 'docker system prune -f'
-        }
-    }
+    // post {
+    //     always {
+    //         sh 'docker system prune -f'
+    //     }
+    // }
 }
