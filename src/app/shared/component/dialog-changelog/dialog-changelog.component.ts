@@ -68,6 +68,7 @@ export class DialogChangelogComponent {
       features: [
         '📱 Responsive design for mobile devices',
         '📸 Added capture button',
+        '🚀 Improved web performance and load times'
       ]
     }
   ];
