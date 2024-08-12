@@ -75,6 +75,16 @@ input[type="number"] {
   background: #555;
 }
 
+.span-input-disabled {
+  @apply h-7 w-full min-w-20 md:min-w-24 2xl:min-w-32 rounded-sm border-2 border-slate-800 px-1 sm:px-2 py-0.5 text-xs md:text-sm text-slate-800 placeholder-transparent
+  hover:border-sky-700 hover:outline-none
+  hover:ring-1 hover:ring-sky-700
+  focus:border-sky-700 focus:outline-none
+  focus:ring-2 focus:ring-sky-700
+  bg-slate-300 font-semibold
+  dark:border-0 dark:text-gray-400 dark:bg-slate-800;
+}
+
 // TextArea
 .textarea-default {
   @apply h-14 w-full rounded-sm border-2 border-slate-800 px-2 py-1 text-xs text-slate-800 placeholder-transparent
@@ -312,7 +322,7 @@ input[type="number"] {
 }
 
 .text-inline-sm {
-  @apply m-0 p-0 text-sm text-slate-800
+  @apply m-0 p-0 text-xs sm:text-sm text-slate-800
   dark:text-gray-400;
 }
 
@@ -443,7 +453,7 @@ input[type="number"] {
 }
 
 .example-list-explain{
-  @apply flex flex-col w-full space-y-2 h-[400px] overflow-y-auto rounded-lg border-2 border-dashed border-gray-800 px-1 py-2 dark:border-gray-600;
+  @apply flex flex-col min-w-72 sm:min-w-48 sm:w-full space-y-2 h-full sm:h-[520px] overflow-y-auto rounded-lg border-2 border-dashed border-gray-800 px-1 py-2 dark:border-gray-600;
 }
 
 .element-list{

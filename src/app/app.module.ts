@@ -16,6 +16,7 @@ import { DialogEditPlayerComponent } from './component/dialog-edit-player/dialog
 import { DiscordDialogComponent } from './component/discord-dialog/discord-dialog.component';
 import { CreditsDialogComponent } from './component/credits-dialog/credits-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxCaptureModule } from 'ngx-capture';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     DragDropModule,
     DialogModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxCaptureModule
   ],
   providers: [],
   bootstrap: [AppComponent]

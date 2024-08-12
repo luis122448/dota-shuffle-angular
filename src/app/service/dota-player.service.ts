@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {
-  DotaPlayerModel,
-  BasicPlayerModel,
-  BestShuffleResult,
-  TotalCombination,
-} from '../model/dota-player.model';
+import { DotaPlayerModel } from '../model/dota-player.model';
 import { DefaultValuesService } from './default-values.service';
 
 interface Medal {
@@ -116,7 +111,7 @@ export class DotaPlayerDataSource {
     return bestCombination!;
   }
 
-  private findSecondBestShuffle(arr: number[]): [number[],number[]] {
+  private findSecondBestShuffle(arr: number[]): [number[], number[]] {
     const k = arr.length / 2; // Número de jugadores por grupo (5 en este caso)
     const allCombinations = this.getCombinations(arr, k);
     let bestCombination: [number[], number[]] | null = null;
@@ -142,7 +137,7 @@ export class DotaPlayerDataSource {
     return secondBestCombination!;
   }
 
-  private findTerceBestShuffle(arr: number[]): [number[],number[]] {
+  private findTerceBestShuffle(arr: number[]): [number[], number[]] {
     const k = arr.length / 2; // Número de jugadores por grupo (5 en este caso)
     const allCombinations = this.getCombinations(arr, k);
     let bestCombination: [number[], number[]] | null = null;
@@ -256,7 +251,7 @@ export class DotaPlayerDataSource {
       name: name,
       mmr: Number(mmr),
       team: 0,
-      medal: `${this.onMedal(mmr)}.png`,
+      medal: `${this.onMedal(mmr)}.webp`,
     };
     this.data.value.push(player);
   }
@@ -266,7 +261,7 @@ export class DotaPlayerDataSource {
       if (player.id === id) {
         player.name = name;
         (player.mmr = Number(mmr)), (player.label = `${name} - ${mmr}`);
-        player.medal = `${this.onMedal(mmr)}.png`;
+        player.medal = `${this.onMedal(mmr)}.webp`;
       }
       return player;
     });
@@ -307,7 +302,7 @@ export class DotaPlayerDataSource {
       throw new Error('Debe haber exactamente 10 jugadores');
     }
     const plarysMmr = players.map((player) => player.mmr);
-    let bestCombinatiosMmr : [number[], number[]] = [[], []];
+    let bestCombinatiosMmr: [number[], number[]] = [[], []];
     if (this.numberShuffle === 0) {
       bestCombinatiosMmr = this.findBestGroups(plarysMmr);
       this.numberShuffle++;
@@ -316,14 +311,16 @@ export class DotaPlayerDataSource {
       this.numberShuffle++;
     } else {
       bestCombinatiosMmr = this.findTerceBestShuffle(plarysMmr);
-      this.numberShuffle=0;
+      this.numberShuffle = 0;
     }
     // console.log('Mejores combinaciones de MMR: ', bestCombinatiosMmr);
     // Asignando el Team 1 y Team 2
     players.forEach((player) => {
       player.team = bestCombinatiosMmr[0].includes(player.mmr) ? 1 : 2;
       // Aignar el MaxSoloMmr al jugador con el mayor mmr de cada equipo
-      player.maxSoloMmr = ( player.mmr === Math.max(...bestCombinatiosMmr[0]) || player.mmr === Math.max(...bestCombinatiosMmr[1]) );
+      player.maxSoloMmr =
+        player.mmr === Math.max(...bestCombinatiosMmr[0]) ||
+        player.mmr === Math.max(...bestCombinatiosMmr[1]);
     });
     this.data.next(players);
   }
