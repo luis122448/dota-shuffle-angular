@@ -18,6 +18,7 @@ export class LayoutDotaShuffleComponent {
     this.dialog.open(DialogChangelogComponent, {
       width: '480px',
       height: '600px',
+      ariaLabel: 'Changelog Dialog'
     });
   }
 }
