@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { faSpinner,faFloppyDisk,faCalculator,faCircleLeft,faBroomBall,faCircleXmark,faNewspaper,
 faMagnifyingGlass,faQuestion,faTrashCan,faPenToSquare, IconDefinition, faPlus, faTrashArrowUp, faRightToBracket, faFileInvoice, faUpload, faDownload,
-faShuffle,faMedal,faRankingStar,faBug,faCamera} from '@fortawesome/free-solid-svg-icons';
+faShuffle,faMedal,faRankingStar,faBug,faCamera,
+faCopy} from '@fortawesome/free-solid-svg-icons';
 import { faDiscord, faSteam } from '@fortawesome/free-brands-svg-icons';
 import { Colors, COLORS } from '../../model/color.model';
 import { ButtonOption } from '../../model/button-option.model';
@@ -17,6 +18,7 @@ export class ButtonStandardComponent {
   @Input() optionBtn: ButtonOption = ''
   @Input() typeBtn: 'reset' | 'submit' | 'button' = 'button';
   @Input() colorBtn: Colors = 'green';
+  @Input() alignBtn: 'left' | 'center' | 'right' = 'center';
   @Input() responsiveBtn = false;
 
   mapColors = COLORS;
@@ -90,6 +92,8 @@ export class ButtonStandardComponent {
         return faBug
       case 'capture':
         return faCamera
+      case 'copy':
+        return faCopy
       default:
         return faQuestion; // Puedes establecer un ícono predeterminado aquí si es necesario
     }

@@ -2,7 +2,9 @@
   class="h-full px-4 w-auto flex flex-col sm:grid sm:grid-cols-3 sm:gap-x-6 bg-slate-100 dark:bg-slate-900 dark:text-gray-400 m-auto lg:px-6 xl:px-8"
 >
   <section class="h-full sm:col-span-1 flex flex-col justify-start">
-    <article class="h-auto px-4 py-2 w-80 sm:w-auto sm:h-32 mt-4 sm:mt-8 mx-auto">
+    <article
+      class="h-auto px-4 py-2 w-80 sm:w-auto sm:h-32 mt-4 sm:mt-8 mx-auto"
+    >
       <form action="#" [formGroup]="formPlayer" class="flex flex-col space-y-4">
         <div class="flex flex-col space-y-2">
           <div class="grid grid-cols-3 items-center">
@@ -39,7 +41,9 @@
         </div>
       </form>
     </article>
-    <article class="h-[590px] sm:h-auto space-y-2 items-center py-2 max-w-[320px] mx-auto">
+    <article
+      class="h-[590px] sm:h-auto space-y-2 items-center py-2 max-w-[320px] mx-auto"
+    >
       <div class="flex flex-row justify-between">
         <h2 class="text-inline-md font-bold">No asignado</h2>
         <h2 class="text-inline-md font-bold">
@@ -77,16 +81,18 @@
         <label for="total0" class="text-inline-sm font-bold col-span-3"
           >Total</label
         >
-        <span
-        name="total0"
-        class="span-input-disabled col-span-2 text-right"
-        >{{ total0 }}</span
-      >
+        <span name="total0" class="span-input-disabled col-span-2 text-right">{{
+          total0
+        }}</span>
       </div>
     </article>
   </section>
-  <section class="h-full sm:col-span-2 flex flex-col pt-24 sm:pt-0 items-center">
-    <article class="flex flex-row justify-around items-center h-16 w-72 sm:w-full">
+  <section
+    class="h-full sm:col-span-2 flex flex-col pt-24 sm:pt-0 items-center"
+  >
+    <article
+      class="flex flex-row justify-around items-center h-16 w-72 sm:w-full"
+    >
       <app-button-standard
         [disabledBtn]="formPlayer.invalid"
         optionBtn="shuffle"
@@ -110,14 +116,39 @@
         (click)="onDeleteAll()"
         >Delete All
       </app-button-standard>
-      <app-button-standard
-        [disabledBtn]="formPlayer.invalid"
-        optionBtn="capture"
-        colorBtn="green"
-        [responsiveBtn]="true"
-        (click)="onCapture()"
-        >Capture
-      </app-button-standard>
+      <div class="button-container">
+        <app-button-standard
+          [cdkMenuTriggerFor]="capture"
+          [disabledBtn]="formPlayer.invalid"
+          optionBtn="capture"
+          colorBtn="green"
+          [responsiveBtn]="true"
+          (click)="toggleMenu()"
+          >Capture
+        </app-button-standard>
+        <ng-template #capture>
+          <div class="bg-green-700 text-white flex flex-col items-start rounded" *ngIf="menuOpen" cdkMenu>
+            <app-button-standard
+              cdkMenuItem
+              optionBtn="download"
+              colorBtn="green"
+              alignBtn="left"
+              [responsiveBtn]="true"
+              (click)="onCapture('download')"
+              >Download</app-button-standard
+            >
+            <app-button-standard
+              cdkMenuItem
+              optionBtn="copy"
+              colorBtn="green"
+              alignBtn="left"
+              [responsiveBtn]="true"
+              (click)="onCapture('copy')"
+              >Copy Img.</app-button-standard
+            >
+          </div>
+        </ng-template>
+      </div>
     </article>
     <article
       #captureArea
@@ -210,7 +241,9 @@
         </div>
       </div>
     </article>
-    <article class="h-auto my-auto flex flex-col justify-around pb-10 sm:pb-auto">
+    <article
+      class="h-auto my-auto flex flex-col justify-around pb-10 sm:pb-auto"
+    >
       <app-metrics-dashboard></app-metrics-dashboard>
     </article>
   </section>

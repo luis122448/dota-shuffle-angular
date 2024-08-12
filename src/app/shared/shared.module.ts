@@ -10,6 +10,7 @@ import { ButtonOperacComponent } from './component/button-operac/button-operac.c
 import { DialogErrorAlertComponent } from './component/dialog-error-alert/dialog-error-alert.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkMenuModule } from '@angular/cdk/menu';
 import { DialogChangelogComponent } from './component/dialog-changelog/dialog-changelog.component';
 import { MetricsDashboardComponent } from './component/metrics-dashboard/metrics-dashboard.component';
 import { NumberFormatPipe } from './pipe/number-format.pipe';
@@ -33,7 +34,8 @@ import { OrderByPipe } from './pipe/order-by.pipe';
     RouterModule,
     FontAwesomeModule,
     DragDropModule,
-    DialogModule
+    DialogModule,
+    CdkMenuModule
   ],
   exports: [
     ButtonStandardComponent,
@@ -44,7 +46,8 @@ import { OrderByPipe } from './pipe/order-by.pipe';
     DialogErrorAlertComponent,
     OrderByPipe,
     NumberFormatPipe,
-    MetricsDashboardComponent
+    MetricsDashboardComponent,
+    CdkMenuModule
   ]
 })
 

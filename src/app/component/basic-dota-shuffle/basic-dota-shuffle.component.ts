@@ -28,6 +28,8 @@ export class BasicDotaShuffleComponent {
   diff: number = 0;
   difference: string = '';
   countPlayersNotInTeam: number = 0;
+  menuOpen = false;
+  actionText = 'Capture';
 
   private BuildForm() {
     this.formPlayer = this.formBuilder.group({
@@ -100,13 +102,64 @@ export class BasicDotaShuffleComponent {
     );
   }
 
-  onCapture() {
-    this.captureService.getImage(this.captureArea.nativeElement, true).subscribe((img) => {
-      const link = document.createElement('a');
-      link.href = img;
-      link.download = 'emparejamiento.png';
-      link.click();
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  onCapture(action: 'download' | 'copy' = 'download') {
+    this.captureService.getImage(this.captureArea.nativeElement, true).subscribe((img: string) => {
+      if (action === 'download') {
+        this.downloadImage(img);
+      } else if (action === 'copy') {
+        this.copyImageToClipboard(img);
+      }
+      this.menuOpen = false; // Close menu after action
     });
+  }
+
+  private downloadImage(img: string) {
+    const link = document.createElement('a');
+    link.href = img;
+    link.download = 'shuffle.png';
+    link.click();
+  }
+
+  private copyImageToClipboard(img: string) {
+    // Create an image element
+    const image = new Image();
+    image.src = img;
+
+    // Create a canvas element to draw the image
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+
+    // Ensure context is not null before using it
+    if (context) {
+      image.onload = () => {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        context.drawImage(image, 0, 0);
+
+        // Copy the canvas content to the clipboard
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const clipboardItem = new ClipboardItem({ 'image/png': blob });
+            navigator.clipboard.write([clipboardItem]).then(() => {
+              console.log('Image copied to clipboard successfully!');
+            }).catch((error) => {
+              console.error('Failed to copy image to clipboard:', error);
+            });
+          }
+        }, 'image/png');
+      };
+
+      // Handle image load errors
+      image.onerror = (error) => {
+        console.error('Failed to load image:', error);
+      };
+    } else {
+      console.error('Failed to get canvas 2D context');
+    }
   }
 
   onShuffle() {

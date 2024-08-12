@@ -2,7 +2,8 @@
   [type]="typeBtn"
   [ngClass]="colors"
   [ngClass]="responsiveBtn ? 'w-auto' : 'min-w-[100px]'"
-  class="flex flex-nowrap justify-center space-x-2 rounded px-4 py-1 text-sm font-medium mx-auto"
+  [ngClass]="alignBtn == 'center' ? 'justify-center' : 'justify-start'"
+  class="flex flex-nowrap space-x-2 rounded px-4 py-1 text-sm font-medium mx-auto"
 >
   <section>
     <fa-icon [icon]="getIcon(optionBtn)"></fa-icon>
