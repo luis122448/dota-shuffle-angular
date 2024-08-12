@@ -299,7 +299,7 @@ export class DotaPlayerDataSource {
   public onShuffle() {
     const players = this.data.value;
     if (players.length !== 10) {
-      throw new Error('Debe haber exactamente 10 jugadores');
+      throw new Error('Error, Then number of players must be 10!');
     }
     const plarysMmr = players.map((player) => player.mmr);
     let bestCombinatiosMmr: [number[], number[]] = [[], []];
