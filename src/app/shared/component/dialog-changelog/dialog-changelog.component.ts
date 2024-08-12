@@ -14,53 +14,64 @@ export class DialogChangelogComponent {
   changeLog: ChangeLog[] = [
     {
       id: 1,
-      title: 'Initial Release',
+      title: 'Initial Release 🚀',
       date: new Date('2024-05-12'),
-      description: 'First release of the app, introducing core features and functionalities.',
+      description: 'We are excited to launch the first version of our app! This release introduces the core features and functionalities that lay the foundation for future updates.',
       version: '1.0.0',
       features: [
-        'Fisrt version of the app',
-        'Support light and dark mode',
-        'Add LocalStorage for save data',
+        '🎉 Initial version of the app',
+        '🌗 Support for light and dark mode',
+        '💾 LocalStorage for saving data',
       ]
     },
     {
       id: 2,
-      title: 'Feature Update',
+      title: 'Feature Update ✨',
       date: new Date('2024-06-24'),
-      description: 'Second version of the app with new features and improvements.',
+      description: 'The second version of the app brings new features and enhancements to improve user experience.',
       version: '1.1.0',
       features: [
-        'Add extra validation for Add Player form',
-        'Add indicator for total players',
-        'Add credits button',
+        '✅ Extra validation added for Add Player form',
+        '📊 Indicator for total players',
+        '💡 New credits button',
       ]
     },
     {
       id: 3,
-      title: 'Enhancements and SSR',
+      title: 'Enhancements and SSR 🌟',
       date: new Date('2024-08-06'),
-      description: 'Third version of the app with new badges, top MMR button, and SSR support.',
+      description: 'In this release, we introduce new badges, a top MMR button, and support for Server-Side Rendering (SSR) to enhance performance and user engagement.',
       version: '1.2.0',
       features: [
-        'Add badges ( First Win!, Full! )',
-        'Add top MMR button',
-        'Add SSR for CEO',
+        '🏅 New badges (First Win!, Full!)',
+        '🔝 Top MMR button',
+        '⚙️ SSR support for CEO',
       ]
     },
     {
       id: 4,
-      title: 'Implementing Metrics',
+      title: 'Implementing Metrics 📈',
       date: new Date('2024-08-11'),
-      description: 'Third version of the app with new badges, top MMR button, and SSR support.',
+      description: 'This update focuses on improving accessibility and responsiveness, while also introducing real-time metrics via WebSockets.',
       version: '1.3.0',
       features: [
-        'Update styles for accessibility and responsiveness',
-        'Add metrics for tracking',
-        'Update icons and buttons',
+        '🎨 Updated styles for better accessibility and responsiveness',
+        '📊 Implemented WebSockets for real-time metrics',
+      ]
+    },
+    {
+      id: 5,
+      title: 'Support for Mobile Devices 📱',
+      date: new Date('2024-08-11'),
+      description: 'This release enhances mobile compatibility and introduces a new capture button for a better user experience on mobile devices.',
+      version: '1.4.0',
+      features: [
+        '📱 Responsive design for mobile devices',
+        '📸 Added capture button',
       ]
     }
   ];
+
   lastIdChangeLog = this.changeLog.length;
 
   constructor(

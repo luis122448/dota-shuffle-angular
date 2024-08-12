@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
       // Open Graph tags for social media
       { property: 'og:title', content: 'Dota Shuffle MMR' },
       { property: 'og:description', content: 'Application to balance Dota 2 teams, according to the MMR' },
-      { property: 'og:image', content: '/assets/image/icon/tama-icon.png' },
+      { property: 'og:image', content: '/assets/image/icon/tama-icon.webp' },
       { property: 'og:url', content: 'https://dota-shuffle.luis122448.com/' },
       { property: 'og:type', content: 'website' },
       // Metadatos para Discord
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Dota Shuffle MMR' },
       { name: 'twitter:description', content: 'Application to balance Dota 2 teams, according to the MMR' },
-      { name: 'twitter:image', content: '/assets/image/icon/tama-icon.png' },
+      { name: 'twitter:image', content: '/assets/image/icon/tama-icon.webp' },
       { name: 'twitter:site', content: '@luis122448' },
 
       // Additional meta tags
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
       { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       { name: 'application-name', content: 'Dota Shuffle MMR' },
       { name: 'msapplication-TileColor', content: '#ff6600' },
-      { name: 'msapplication-TileImage', content: '/assets/image/icon/tama-icon.png' },
+      { name: 'msapplication-TileImage', content: '/assets/image/icon/tama-icon.webp' },
     ]);
   }
   ngOnInit(): void {
