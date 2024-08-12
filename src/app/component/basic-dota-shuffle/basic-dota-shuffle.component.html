@@ -1,8 +1,8 @@
 <main
-  class="h-full px-4 w-auto grid grid-cols-3 gap-x-6 bg-slate-100 dark:bg-slate-900 dark:text-gray-400 m-auto lg:px-6 xl:px-8"
+  class="h-full px-4 w-auto flex flex-col sm:grid sm:grid-cols-3 sm:gap-x-6 bg-slate-100 dark:bg-slate-900 dark:text-gray-400 m-auto lg:px-6 xl:px-8"
 >
-  <section class="col-span-1 flex flex-col justify-start item">
-    <article class="px-4 py-2 h-32 w-auto mt-8">
+  <section class="h-full sm:col-span-1 flex flex-col justify-start">
+    <article class="h-auto px-4 py-2 w-80 sm:w-auto sm:h-32 mt-4 sm:mt-8 mx-auto">
       <form action="#" [formGroup]="formPlayer" class="flex flex-col space-y-4">
         <div class="flex flex-col space-y-2">
           <div class="grid grid-cols-3 items-center">
@@ -39,12 +39,12 @@
         </div>
       </form>
     </article>
-    <article class="space-y-2 items-center py-2 max-w-[320px] mx-auto">
+    <article class="h-[590px] sm:h-auto space-y-2 items-center py-2 max-w-[320px] mx-auto">
       <div class="flex flex-row justify-between">
         <h2 class="text-inline-md font-bold">No asignado</h2>
         <h2 class="text-inline-md font-bold">
           <span
-            class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
+            class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
             *ngIf="countPlayersNotInTeam === 10"
             >Full!</span
           >
@@ -74,30 +74,31 @@
         </div>
       </div>
       <div class="grid grid-cols-5 items-center">
-        <label for="total0" class="text-inline-sm font-bold col-span-3">Total</label>
-        <input
-          name="total0"
-          type="number"
-          class="input-default col-span-2 text-right"
-          placeholder="total0"
-          [(ngModel)]="total0"
-          [disabled]="true"
-        />
+        <label for="total0" class="text-inline-sm font-bold col-span-3"
+          >Total</label
+        >
+        <span
+        name="total0"
+        class="span-input-disabled col-span-2 text-right"
+        >{{ total0 }}</span
+      >
       </div>
     </article>
   </section>
-  <section class="col-span-2 w-full flex flex-col">
-    <article class="flex flex-row justify-around items-center h-16 w-auto">
+  <section class="h-full sm:col-span-2 flex flex-col pt-24 sm:pt-0 items-center">
+    <article class="flex flex-row justify-around items-center h-16 w-72 sm:w-full">
       <app-button-standard
         [disabledBtn]="formPlayer.invalid"
         optionBtn="shuffle"
         colorBtn="sky"
+        [responsiveBtn]="true"
         (click)="onShuffle()"
         >Shuffle</app-button-standard
       ><app-button-standard
         [disabledBtn]="formPlayer.invalid"
         optionBtn="refresh"
         colorBtn="sky"
+        [responsiveBtn]="true"
         (click)="onReset()"
         >Reset</app-button-standard
       >
@@ -105,17 +106,29 @@
         [disabledBtn]="formPlayer.invalid"
         optionBtn="delete"
         colorBtn="red"
+        [responsiveBtn]="true"
         (click)="onDeleteAll()"
         >Delete All
       </app-button-standard>
+      <app-button-standard
+        [disabledBtn]="formPlayer.invalid"
+        optionBtn="capture"
+        colorBtn="green"
+        [responsiveBtn]="true"
+        (click)="onCapture()"
+        >Capture
+      </app-button-standard>
     </article>
-    <article class="grid grid-cols-2 gap-x-6 lg:gap-x-8 xl:gap-x-10 max-w-[720px] mx-auto">
+    <article
+      #captureArea
+      class="bg-slate-100 dark:bg-slate-900 dark:text-gray-400 grid grid-cols-2 gap-x-2 sm:gap-x-6 lg:gap-x-8 xl:gap-x-10 max-w-[720px] mx-auto sm:px-2 lg:px-4 py-2"
+    >
       <div class="space-y-2 items-center py-2">
         <h2 class="text-inline-md font-semibold">
           Team N°1
           <span
-            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
             *ngIf="diff < 0"
+            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
             >First Win!</span
           >
         </h2>
@@ -135,34 +148,30 @@
           </div>
         </div>
         <div class="grid grid-cols-5 items-center">
-          <label for="total1" class="text-inline-sm font-bold col-span-3">Total</label>
-          <input
+          <label for="total1" class="text-inline-sm font-bold col-span-3"
+            >Total</label
+          >
+          <span
             name="total1"
-            type="number"
-            class="input-default col-span-2 text-right"
-            placeholder="total1"
-            [(ngModel)]="total1"
-            [disabled]="true"
-          />
+            class="span-input-disabled col-span-2 text-right"
+            >{{ total1 }}</span
+          >
         </div>
         <div class="grid grid-cols-5 items-center" *ngIf="diff >= 0">
-          <label for="diff" class="text-inline-sm font-bold col-span-3">Diference</label>
-          <input
-            name="diff"
-            type="text"
-            class="input-default col-span-2 text-right"
-            placeholder="diff"
-            [(ngModel)]="diference"
-            [disabled]="true"
-          />
+          <label for="diff" class="text-inline-sm font-bold col-span-3"
+            >Difference</label
+          >
+          <span name="diff" class="span-input-disabled col-span-2 text-right">{{
+            difference
+          }}</span>
         </div>
       </div>
       <div class="space-y-2 items-center py-2">
         <h2 class="text-inline-md font-semibold">
           Team N°2
           <span
-            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
             *ngIf="diff >= 0"
+            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
             >First Win!</span
           >
         </h2>
@@ -182,30 +191,26 @@
           </div>
         </div>
         <div class="grid grid-cols-5 items-center">
-          <label for="total2" class="text-inline-sm font-bold col-span-3">Total</label>
-          <input
+          <label for="total2" class="text-inline-sm font-bold col-span-3"
+            >Total</label
+          >
+          <span
             name="total2"
-            type="number"
-            class="input-default col-span-2 text-right"
-            placeholder="total2"
-            [(ngModel)]="total2"
-            [disabled]="true"
-          />
+            class="span-input-disabled col-span-2 text-right"
+            >{{ total2 }}</span
+          >
         </div>
         <div class="grid grid-cols-5 items-center" *ngIf="diff < 0">
-          <label for="diff" class="text-inline-sm font-bold col-span-3">Diference</label>
-          <input
-            name="diff"
-            type="text"
-            class="input-default col-span-2 text-right"
-            placeholder="diff"
-            [(ngModel)]="diference"
-            [disabled]="true"
-          />
+          <label for="diff" class="text-inline-sm font-bold col-span-3"
+            >Difference</label
+          >
+          <span name="diff" class="span-input-disabled col-span-2 text-right">{{
+            difference
+          }}</span>
         </div>
       </div>
     </article>
-    <article class="h-72 flex flex-col justify-around">
+    <article class="h-auto my-auto flex flex-col justify-around pb-10 sm:pb-auto">
       <app-metrics-dashboard></app-metrics-dashboard>
     </article>
   </section>
