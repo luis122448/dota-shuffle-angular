@@ -76,7 +76,7 @@ export class DotaPlayerDataSource {
   private getCombinations(arr: number[], k: number): number[][] {
     const combinations: number[][] = [];
 
-    function helper(start: number, path: number[]) {
+  function helper(start: number, path: number[]) {
       if (path.length === k) {
         combinations.push([...path]);
         return;
@@ -286,6 +286,18 @@ export class DotaPlayerDataSource {
 
   public getPlayers() {
     return this.data.value;
+  }
+
+  public getTeam1() {
+    return this.group1.value;
+  }
+
+  public getTeam2() {
+    return this.group2.value;
+  }
+
+  public isPlayerIdInTeam(id: number){
+    return !this.group0.value.some(player => player.id === id)
   }
 
   public setPlayers(players: DotaPlayerModel[]) {

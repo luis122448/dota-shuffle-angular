@@ -35,12 +35,12 @@
         [cdkDropListData]="getTeam(0)"
         [cdkDropListConnectedTo]="[Team1, Team2]"
         class="example-list-explain"
-        (cdkDropListDropped)="drop($event,0)"
+        [ngClass]="{ 'border-dashed': unlock(), 'border-solid': !unlock() }"
+        (cdkDropListDropped)="drop($event, 0)"
       >
         <div *ngFor="let item of getTeam(0)" cdkDrag>
           <app-item-player
             [player]="item"
-            [unlock]="unlock"
             (dropped)="deletePlayer($event)"
             [isEdit]="true"
           ></app-item-player>
@@ -92,7 +92,11 @@
           >Capture
         </app-button-standard>
         <ng-template #capture>
-          <div class="bg-green-700 text-white flex flex-col items-start rounded" *ngIf="menuOpen" cdkMenu>
+          <div
+            class="bg-green-700 text-white flex flex-col items-start rounded"
+            *ngIf="menuOpen"
+            cdkMenu
+          >
             <app-button-standard
               cdkMenuItem
               optionBtn="download"
@@ -134,12 +138,12 @@
           [cdkDropListData]="getTeam(1)"
           [cdkDropListConnectedTo]="[Team2, Team0]"
           class="example-list"
-          (cdkDropListDropped)="drop($event,1)"
+          [ngClass]="{ 'border-dashed': unlock(), 'border-solid': !unlock() }"
+          (cdkDropListDropped)="drop($event, 1)"
         >
           <div *ngFor="let item of getTeam(1)" cdkDrag>
             <app-item-player
               [player]="item"
-              [unlock]="unlock"
               (dropped)="deletePlayer($event)"
             ></app-item-player>
           </div>
@@ -178,12 +182,12 @@
           [cdkDropListData]="getTeam(2)"
           [cdkDropListConnectedTo]="[Team1, Team0]"
           class="example-list"
-          (cdkDropListDropped)="drop($event,2)"
+          [ngClass]="{ 'border-dashed': unlock(), 'border-solid': !unlock() }"
+          (cdkDropListDropped)="drop($event, 2)"
         >
           <div *ngFor="let item of getTeam(2)" cdkDrag>
             <app-item-player
               [player]="item"
-              [unlock]="unlock"
               (dropped)="deletePlayer($event)"
             ></app-item-player>
           </div>

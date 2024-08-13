@@ -26,7 +26,7 @@
     </div>
     <div class="flex flex-row justify-end items-center space-x-2">
       <app-button-standard
-        *ngIf="unlock"
+        *ngIf="unlock()"
         [disabledBtn]="formPlayer.invalid"
         optionBtn="unlock"
         colorBtn="gray"
@@ -34,7 +34,7 @@
         >Lock</app-button-standard
       >
       <app-button-standard
-        *ngIf="!unlock"
+        *ngIf="!unlock()"
         [disabledBtn]="formPlayer.invalid"
         optionBtn="lock"
         colorBtn="gray"

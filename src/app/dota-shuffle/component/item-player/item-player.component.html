@@ -1,8 +1,7 @@
 <section
   class="h-12 w-auto flex flex-row justify-between items-center space-x-4 border border-gray-600 rounded-lg px-1"
   [ngClass]="{
-    'bg-gray-300 dark:bg-blue-950': player?.maxSoloMmr,
-    'font-bold text-red-800': unlock
+    'bg-gray-300 dark:bg-blue-950': player?.maxSoloMmr
   }"
 >
   <article class="w-12">
@@ -14,7 +13,14 @@
       class="object-cover"
     />
   </article>
-  <article class="text-inline-sm font-semibold">{{ player?.label }}</article>
+  <article
+    class="text-inline-sm font-semibold"
+    [ngClass]="{
+    'font-bold text-red-600 dark:text-sky-500': isPlayerInTeams(player?.id)
+  }"
+  >
+    {{ player?.label }}
+  </article>
   <article *ngIf="isEdit" class="flex flex-row justify-end space-x-1">
     <app-button-operac
       [optionBtn]="'edit'"

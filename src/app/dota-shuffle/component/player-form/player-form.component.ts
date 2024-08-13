@@ -1,5 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DefaultValuesService } from '@dota-shuffle/service/default-values.service';
 import { DotaPlayerDataSource } from '@dota-shuffle/service/dota-player.service';
@@ -8,15 +8,14 @@ import { DialogErrorAlertComponent } from '@shared/component/dialog-error-alert/
 @Component({
   selector: 'app-player-form',
   templateUrl: './player-form.component.html',
-  styleUrls: ['./player-form.component.scss']
+  styleUrls: ['./player-form.component.scss'],
 })
 export class PlayerFormComponent {
-
   @Output() onCalculate = new EventEmitter<boolean>(false);
   @Output() onUnlock = new EventEmitter<boolean>(false);
   playerDataSouce = DotaPlayerDataSource.getInstance();
   formPlayer!: FormGroup;
-  unlock: boolean = false;
+  unlock = signal(false);
 
   private BuildForm() {
     this.formPlayer = this.formBuilder.group({
@@ -33,8 +32,8 @@ export class PlayerFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private defaultValuesService: DefaultValuesService,
-    private dialog: Dialog,
-  ){
+    private dialog: Dialog
+  ) {
     this.BuildForm();
   }
 
@@ -69,8 +68,16 @@ export class PlayerFormComponent {
   }
 
   unlockPlayer(unlock: boolean) {
+    if (this.playerDataSouce.getPlayers().length < 10) {
+      this.dialog.open(DialogErrorAlertComponent, {
+        width: '400px',
+        data: {
+          status: -3,
+          message: 'Error, Then number of players must be 10!',
+        },
+      });
+    }
     this.onUnlock.emit(unlock);
-    this.unlock = unlock;
+    this.unlock.set(unlock);
   }
-
 }

@@ -70,6 +70,18 @@ export class DialogChangelogComponent {
         '📸 Added capture button',
         '🚀 Improved web performance and load times'
       ]
+    },
+    {
+      id: 6,
+      title: 'Lock/Unlock Teams 🔒',
+      date: new Date('2024-08-13'),
+      description: 'Enable locking and unlocking of teams for flexible player positioning and shuffling.',
+      version: '1.5.0',
+      features: [
+        '🔐 Lock teams to prevent player movements.',
+        '🔓 Unlock teams to set specific player positions and shuffle others.',
+        '🔄 Visual indicators for locked/unlocked status.'
+      ]
     }
   ];
 

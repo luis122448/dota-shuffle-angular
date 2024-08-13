@@ -36,6 +36,15 @@ export class ButtonStandardComponent {
     }
   }
 
+  get buttonClasses(): string[] {
+    return [
+      ...Object.keys(this.colors),
+      this.responsiveBtn ? 'w-auto' : 'min-w-[100px]',
+      this.alignBtn === 'center' ? 'justify-center' : 'justify-start',
+      'flex flex-nowrap space-x-2 rounded px-4 py-1 text-sm font-medium mx-auto',
+    ];
+  }
+
   getIcon(optionBtn: string): IconDefinition {
     switch (optionBtn) {
       case 'import':

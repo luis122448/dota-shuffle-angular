@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -11,6 +11,7 @@ import { DialogErrorAlertComponent } from 'src/app/shared/component/dialog-error
 import { DefaultValuesService } from '@dota-shuffle/service/default-values.service';
 import { MetricsService } from '@dota-shuffle/service/metrics.service';
 import { NgxCaptureService } from 'ngx-capture';
+import { NotificationService } from '@dota-shuffle/service/notification.service';
 
 @Component({
   selector: 'app-basic-dota-shuffle',
@@ -29,13 +30,14 @@ export class BasicDotaShuffleComponent {
   countPlayersNotInTeam: number = 0;
   menuOpen = false;
   actionText = 'Capture';
-  unlock = false;
+  unlock = signal(false);
 
   constructor(
     private defaultValuesService: DefaultValuesService,
     private dialog: Dialog,
     private metricsService: MetricsService,
-    private captureService: NgxCaptureService
+    private captureService: NgxCaptureService,
+    private notificationService: NotificationService
   ) {
     const players: DotaPlayerModel[] =
       this.defaultValuesService.getLocalStorageValue('players');
@@ -65,14 +67,16 @@ export class BasicDotaShuffleComponent {
   }
 
   onCapture(action: 'download' | 'copy' = 'download') {
-    this.captureService.getImage(this.captureArea.nativeElement, true).subscribe((img: string) => {
-      if (action === 'download') {
-        this.downloadImage(img);
-      } else if (action === 'copy') {
-        this.copyImageToClipboard(img);
-      }
-      this.menuOpen = false; // Close menu after action
-    });
+    this.captureService
+      .getImage(this.captureArea.nativeElement, true)
+      .subscribe((img: string) => {
+        if (action === 'download') {
+          this.downloadImage(img);
+        } else if (action === 'copy') {
+          this.copyImageToClipboard(img);
+        }
+        this.menuOpen = false; // Close menu after action
+      });
   }
 
   private downloadImage(img: string) {
@@ -102,11 +106,14 @@ export class BasicDotaShuffleComponent {
         canvas.toBlob((blob) => {
           if (blob) {
             const clipboardItem = new ClipboardItem({ 'image/png': blob });
-            navigator.clipboard.write([clipboardItem]).then(() => {
-              console.log('Image copied to clipboard successfully!');
-            }).catch((error) => {
-              console.error('Failed to copy image to clipboard:', error);
-            });
+            navigator.clipboard
+              .write([clipboardItem])
+              .then(() => {
+                console.log('Image copied to clipboard successfully!');
+              })
+              .catch((error) => {
+                console.error('Failed to copy image to clipboard:', error);
+              });
           }
         }, 'image/png');
       };
@@ -121,12 +128,26 @@ export class BasicDotaShuffleComponent {
   }
 
   onShuffle() {
+    if (this.unlock()) {
+      this.dialog.open(DialogErrorAlertComponent, {
+        width: '400px',
+        data: {
+          status: -3,
+          message: 'You must 🔒 lock the teams to shuffle the players',
+        },
+      });
+      return;
+    }
     try {
       this.playerDataSouce.onShuffle();
       this.onCalculate();
       this.metricsService.patchMetrics(2, 1).subscribe();
-      this.metricsService.patchMetrics(3, this.playerDataSouce.getTotalMMRPlayers()).subscribe();
-      this.metricsService.patchMetrics(4, this.playerDataSouce.getTotalTopPlayers(12000)).subscribe();
+      this.metricsService
+        .patchMetrics(3, this.playerDataSouce.getTotalMMRPlayers())
+        .subscribe();
+      this.metricsService
+        .patchMetrics(4, this.playerDataSouce.getTotalTopPlayers(12000))
+        .subscribe();
     } catch (error: any) {
       this.dialog.open(DialogErrorAlertComponent, {
         width: '400px',
@@ -162,6 +183,10 @@ export class BasicDotaShuffleComponent {
   }
 
   drop(event: CdkDragDrop<DotaPlayerModel[]>, team: number) {
+    if (!this.unlock()) {
+      return;
+    }
+
     const previousContainerData = event.previousContainer.data;
     const movedItem = previousContainerData[event.previousIndex];
     console.log('Elemento movido:', movedItem);
@@ -181,10 +206,7 @@ export class BasicDotaShuffleComponent {
         event.currentIndex
       );
 
-      this.playerDataSouce.movePlayer(
-        movedItem.id,
-        team
-      );
+      this.playerDataSouce.movePlayer(movedItem.id, team);
       console.log(`Moviendo player ${movedItem.id} a equipo ${team}`);
 
       this.onCalculate();
@@ -201,8 +223,11 @@ export class BasicDotaShuffleComponent {
   }
 
   onUnlock($event: boolean) {
-    console.log('Unlock:', $event);
-    this.unlock = $event;
+    if ($event) {
+      this.notificationService.show('🔓 Teams have been unlocked. You can now move players between teams. 🤝');
+    } else {
+      this.notificationService.show('🔒 Teams are now locked. Please shuffle the players. 🔄');
+    }
+    this.unlock.set($event);
   }
-
 }

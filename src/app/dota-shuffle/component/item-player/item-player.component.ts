@@ -8,12 +8,10 @@ import { DefaultValuesService } from '@dota-shuffle/service/default-values.servi
 @Component({
   selector: 'app-item-player',
   templateUrl: './item-player.component.html',
-  styleUrls: ['./item-player.component.scss']
+  styleUrls: ['./item-player.component.scss'],
 })
 export class ItemPlayerComponent {
-
   playerDataSouce = DotaPlayerDataSource.getInstance();
-  @Input() unlock = false;
   @Input() player: DotaPlayerModel | undefined = undefined;
   @Input() isEdit = false;
   @Output() dropped = new EventEmitter<number>();
@@ -21,7 +19,14 @@ export class ItemPlayerComponent {
   constructor(
     private Dialog: Dialog,
     private defaultValuesService: DefaultValuesService
-  ) { }
+  ) {}
+
+  isPlayerInTeams(playerId: number | undefined): boolean {
+    if(!playerId){
+      return false
+    }
+    return this.playerDataSouce.isPlayerIdInTeam(playerId)
+  }
 
   onDropped() {
     if (this.player) {
@@ -32,9 +37,11 @@ export class ItemPlayerComponent {
   onEdit() {
     this.Dialog.open(DialogEditPlayerComponent, {
       width: '400px',
-      data: this.player
+      data: this.player,
     });
-    this.defaultValuesService.setLocalStorageValue('players', this.playerDataSouce.getPlayers());
+    this.defaultValuesService.setLocalStorageValue(
+      'players',
+      this.playerDataSouce.getPlayers()
+    );
   }
-
 }
