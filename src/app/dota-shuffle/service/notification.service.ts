@@ -17,7 +17,7 @@ export class NotificationService {
     }
 
     const overlayRef = this.overlay.create({
-      positionStrategy: this.overlay.position().global().top('20px').centerHorizontally(),
+      positionStrategy: this.overlay.position().global().top('5px').centerHorizontally(),
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       hasBackdrop: false
     });
