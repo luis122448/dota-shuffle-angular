@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, signal, Signal } from '@angular/core';
-import { ApiResponseList } from 'src/app/model/api-response.model';
-import { MetricsModel } from 'src/app/model/metrics.model';
-import { WebSocketService } from 'src/app/service/web-socket.service';
+import { ApiResponseList } from 'src/app/dota-shuffle/model/api-response.model';
+import { MetricsModel } from 'src/app/dota-shuffle/model/metrics.model';
+import { WebSocketService } from '@dota-shuffle/service/web-socket.service';
 import { faUsers, faShuffle, faRankingStar, faMedal, faCalculator, faEarthAmerica, faServer } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

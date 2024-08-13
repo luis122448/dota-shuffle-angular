@@ -2,6 +2,15 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@environment":["src/environments/environment"],
+      "@dota-shuffle-component/*":["src/app/dota-shuffle/component/*"],
+      "@dota-shuffle-model/*":["src/app/dota-shuffle/model/*"],
+      "@dota-shuffle-service/*":["src/app/dota-shuffle/service/"],
+      "@dota-shuffle/*":["src/app/dota-shuffle/*"],
+      "@shared/*":["src/app/shared/*"],
+      "@shared-component/*":["src/app/shared/component/*"],
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

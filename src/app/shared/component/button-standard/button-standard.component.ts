@@ -2,7 +2,9 @@ import { Component, Input } from '@angular/core';
 import { faSpinner,faFloppyDisk,faCalculator,faCircleLeft,faBroomBall,faCircleXmark,faNewspaper,
 faMagnifyingGlass,faQuestion,faTrashCan,faPenToSquare, IconDefinition, faPlus, faTrashArrowUp, faRightToBracket, faFileInvoice, faUpload, faDownload,
 faShuffle,faMedal,faRankingStar,faBug,faCamera,
-faCopy} from '@fortawesome/free-solid-svg-icons';
+faCopy,
+faUnlock,
+faLock} from '@fortawesome/free-solid-svg-icons';
 import { faDiscord, faSteam } from '@fortawesome/free-brands-svg-icons';
 import { Colors, COLORS } from '../../model/color.model';
 import { ButtonOption } from '../../model/button-option.model';
@@ -94,6 +96,10 @@ export class ButtonStandardComponent {
         return faCamera
       case 'copy':
         return faCopy
+      case 'unlock':
+        return faUnlock
+      case 'lock':
+        return faLock
       default:
         return faQuestion; // Puedes establecer un ícono predeterminado aquí si es necesario
     }

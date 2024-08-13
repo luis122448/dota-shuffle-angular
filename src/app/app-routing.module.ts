@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutDotaShuffleComponent } from './layout/layout-dota-shuffle/layout-dota-shuffle.component';
 
 const routes: Routes = [
   {
@@ -10,8 +9,13 @@ const routes: Routes = [
   },
   {
     path: 'dota-shuffle',
-    component: LayoutDotaShuffleComponent,
-    title: 'Dota Shuffle'
+    loadChildren: () => import('./dota-shuffle/dota-shuffle.module').then(m => m.DotaShuffleModule),
+    title: 'Dota Shuffle MMR'
+  },
+  {
+    path: 'metrics',
+    loadChildren: () => import('./metrics/metrics.module').then(m => m.MetricsModule),
+    title: 'Metrics'
   }
 ];
 

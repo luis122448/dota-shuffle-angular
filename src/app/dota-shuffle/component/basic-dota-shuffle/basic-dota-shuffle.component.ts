@@ -4,13 +4,12 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { DotaPlayerModel } from 'src/app/model/dota-player.model';
-import { DotaPlayerDataSource } from 'src/app/service/dota-player.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DotaPlayerModel } from 'src/app/dota-shuffle/model/dota-player.model';
+import { DotaPlayerDataSource } from '@dota-shuffle/service/dota-player.service';
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogErrorAlertComponent } from 'src/app/shared/component/dialog-error-alert/dialog-error-alert.component';
-import { DefaultValuesService } from 'src/app/service/default-values.service';
-import { MetricsService } from 'src/app/service/metrics.service';
+import { DefaultValuesService } from '@dota-shuffle/service/default-values.service';
+import { MetricsService } from '@dota-shuffle/service/metrics.service';
 import { NgxCaptureService } from 'ngx-capture';
 
 @Component({
@@ -20,8 +19,8 @@ import { NgxCaptureService } from 'ngx-capture';
 })
 export class BasicDotaShuffleComponent {
   @ViewChild('captureArea', { static: true }) captureArea!: ElementRef;
+
   playerDataSouce = DotaPlayerDataSource.getInstance();
-  formPlayer!: FormGroup;
   total0: number = 0;
   total1: number = 0;
   total2: number = 0;
@@ -30,27 +29,14 @@ export class BasicDotaShuffleComponent {
   countPlayersNotInTeam: number = 0;
   menuOpen = false;
   actionText = 'Capture';
-
-  private BuildForm() {
-    this.formPlayer = this.formBuilder.group({
-      name: ['', Validators.required],
-      mmr: ['', [Validators.required, Validators.pattern('^[0-9 ]*$')]],
-    });
-  }
-
-  isInputInvalid(fieldName: string): boolean {
-    const field = this.formPlayer.get(fieldName);
-    return field ? field.invalid && field.touched : true;
-  }
+  unlock = false;
 
   constructor(
-    private formBuilder: FormBuilder,
     private defaultValuesService: DefaultValuesService,
     private dialog: Dialog,
     private metricsService: MetricsService,
     private captureService: NgxCaptureService
   ) {
-    this.BuildForm();
     const players: DotaPlayerModel[] =
       this.defaultValuesService.getLocalStorageValue('players');
     if (players.length > 0) {
@@ -63,34 +49,6 @@ export class BasicDotaShuffleComponent {
 
   getTeam(team: number): DotaPlayerModel[] {
     return this.playerDataSouce.getTeam(team);
-  }
-
-  addPlayer() {
-    if (!this.formPlayer.valid) {
-      this.formPlayer.markAllAsTouched();
-      return;
-    }
-    try {
-      const name = this.formPlayer.get('name')?.value;
-      const mmr = this.formPlayer.get('mmr')?.value.trim();
-      this.playerDataSouce.addPlayer(name, mmr);
-      console.log(this.playerDataSouce.getPlayers());
-      this.total0 = this.playerDataSouce.getTotal(0);
-      this.BuildForm();
-      this.onCalculate();
-      this.defaultValuesService.setLocalStorageValue(
-        'players',
-        this.playerDataSouce.getPlayers()
-      );
-    } catch (error: any) {
-      this.dialog.open(DialogErrorAlertComponent, {
-        width: '400px',
-        data: {
-          status: -3,
-          message: error.message,
-        },
-      });
-    }
   }
 
   deletePlayer(id: number) {
@@ -203,7 +161,7 @@ export class BasicDotaShuffleComponent {
     );
   }
 
-  drop(event: CdkDragDrop<DotaPlayerModel[]>) {
+  drop(event: CdkDragDrop<DotaPlayerModel[]>, team: number) {
     const previousContainerData = event.previousContainer.data;
     const movedItem = previousContainerData[event.previousIndex];
     console.log('Elemento movido:', movedItem);
@@ -222,13 +180,29 @@ export class BasicDotaShuffleComponent {
         event.previousIndex,
         event.currentIndex
       );
+
       this.playerDataSouce.movePlayer(
         movedItem.id,
-        event.container.data[0].team
+        team
       );
+      console.log(`Moviendo player ${movedItem.id} a equipo ${team}`);
+
       this.onCalculate();
       console.log('Diferente contenedor');
     }
+
     console.log(event);
   }
+
+  onEventCalculate($event: boolean) {
+    if ($event) {
+      this.onCalculate();
+    }
+  }
+
+  onUnlock($event: boolean) {
+    console.log('Unlock:', $event);
+    this.unlock = $event;
+  }
+
 }

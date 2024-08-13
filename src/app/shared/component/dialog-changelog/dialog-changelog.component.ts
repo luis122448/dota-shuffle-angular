@@ -1,7 +1,7 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
-import { ChangeLog } from 'src/app/model/change-log.model';
+import { ChangeLog } from 'src/app/dota-shuffle/model/change-log.model';
 
 @Component({
   selector: 'app-dialog-changelog',

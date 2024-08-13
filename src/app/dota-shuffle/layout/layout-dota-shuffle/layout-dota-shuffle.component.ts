@@ -1,6 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import { MetricsService } from 'src/app/service/metrics.service';
+import { MetricsService } from '@dota-shuffle/service/metrics.service';
 import { DialogChangelogComponent } from 'src/app/shared/component/dialog-changelog/dialog-changelog.component';
 
 @Component({

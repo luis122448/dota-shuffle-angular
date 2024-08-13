@@ -1,7 +1,7 @@
-import { Component, OnInit, HostListener, Renderer2, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { DOCUMENT, NgClass, CommonModule } from '@angular/common';
+import { Component, Renderer2, inject, OnChanges, SimpleChanges } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-import { DefaultValuesService } from 'src/app/service/default-values.service';
+import { DefaultValuesService } from '@dota-shuffle/service/default-values.service';
 
 @Component({
   selector: 'app-theme-switcher',

@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { Dialog, DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { DotaPlayerModel } from 'src/app/model/dota-player.model';
+import { DotaPlayerModel } from 'src/app/dota-shuffle/model/dota-player.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DotaPlayerDataSource } from 'src/app/service/dota-player.service';
+import { DotaPlayerDataSource } from '@dota-shuffle/service/dota-player.service';
 
 @Component({
   selector: 'app-dialog-edit-player',

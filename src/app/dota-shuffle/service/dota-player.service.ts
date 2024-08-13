@@ -17,6 +17,10 @@ export class DotaPlayerService {
 export class DotaPlayerDataSource {
   static instance: DotaPlayerDataSource;
   data = new BehaviorSubject<DotaPlayerModel[]>([]);
+  group0 = new BehaviorSubject<DotaPlayerModel[]>([]);
+  group1 = new BehaviorSubject<DotaPlayerModel[]>([]);
+  group2 = new BehaviorSubject<DotaPlayerModel[]>([]);
+
   medal: { [menbersey: number]: number } = {
     1: 0,
     2: 154,
@@ -89,57 +93,99 @@ export class DotaPlayerDataSource {
     return combinations;
   }
 
-  private findBestGroups(arr: number[]): [number[], number[]] {
-    const k = arr.length / 2; // Número de jugadores por grupo (5 en este caso)
-    const allCombinations = this.getCombinations(arr, k);
+  private findBestGroups(
+    arr: number[],
+    grup1: number[],
+    grup2: number[]
+  ): [number[], number[]] {
+    // Cantidad de jugadores que necesitamos agregar a cada grupo
+    const numPlayersToAddToGroup1 = 5 - grup1.length;
+
+    // Generar todas las combinaciones posibles de jugadores no asignados
+    const allCombinations = this.getCombinations(arr, numPlayersToAddToGroup1);
+
     let bestCombination: [number[], number[]] | null = null;
     let minDifference = Infinity;
 
     for (let i = 0; i < allCombinations.length; i++) {
-      const group1 = allCombinations[i];
-      const group2 = arr.filter((player) => !group1.includes(player));
+      const additionalGroup1 = allCombinations[i];
+      const additionalGroup2 = arr.filter(
+        (player) => !additionalGroup1.includes(player)
+      );
 
-      const sum1 = group1.reduce((acc, num) => acc + num, 0);
-      const sum2 = group2.reduce((acc, num) => acc + num, 0);
+      const newGroup1 = [...grup1, ...additionalGroup1];
+      const newGroup2 = [...grup2, ...additionalGroup2];
+
+      const sum1 = newGroup1.reduce((acc, num) => acc + num, 0);
+      const sum2 = newGroup2.reduce((acc, num) => acc + num, 0);
       const difference = Math.abs(sum1 - sum2);
 
       if (difference < minDifference) {
         minDifference = difference;
-        bestCombination = [group1, group2];
+        bestCombination = [newGroup1, newGroup2];
       }
     }
+
     return bestCombination!;
   }
 
-  private findSecondBestShuffle(arr: number[]): [number[], number[]] {
-    const k = arr.length / 2; // Número de jugadores por grupo (5 en este caso)
-    const allCombinations = this.getCombinations(arr, k);
+  private findSecondBestShuffle(
+    arr: number[],
+    grupo1: number[],
+    grupo2: number[]
+  ): [number[], number[]] {
+    // Número de jugadores a añadir a grupo1 para completar 5 jugadores
+    const numPlayersToAddToGroup1 = 5 - grupo1.length;
+
+    // Generar todas las combinaciones posibles de jugadores no asignados
+    const allCombinations = this.getCombinations(arr, numPlayersToAddToGroup1);
+
     let bestCombination: [number[], number[]] | null = null;
     let minDifference = Infinity;
     let secondBestCombination: [number[], number[]] | null = null;
     let secondMinDifference = Infinity;
 
     for (let i = 0; i < allCombinations.length; i++) {
-      const group1 = allCombinations[i];
-      const group2 = arr.filter((player) => !group1.includes(player));
+      const additionalGroup1 = allCombinations[i];
+      const additionalGroup2 = arr.filter(
+        (player) => !additionalGroup1.includes(player)
+      );
 
-      const sum1 = group1.reduce((acc, num) => acc + num, 0);
-      const sum2 = group2.reduce((acc, num) => acc + num, 0);
+      const newGroup1 = [...grupo1, ...additionalGroup1];
+      const newGroup2 = [...grupo2, ...additionalGroup2];
+
+      const sum1 = newGroup1.reduce((acc, num) => acc + num, 0);
+      const sum2 = newGroup2.reduce((acc, num) => acc + num, 0);
       const difference = Math.abs(sum1 - sum2);
 
       if (difference < minDifference) {
         secondMinDifference = minDifference;
         minDifference = difference;
         secondBestCombination = bestCombination;
-        bestCombination = [group1, group2];
+        bestCombination = [newGroup1, newGroup2];
+      } else if (
+        difference < secondMinDifference &&
+        difference !== minDifference
+      ) {
+        secondMinDifference = difference;
+        secondBestCombination = [newGroup1, newGroup2];
       }
     }
+
     return secondBestCombination!;
   }
 
-  private findTerceBestShuffle(arr: number[]): [number[], number[]] {
-    const k = arr.length / 2; // Número de jugadores por grupo (5 en este caso)
-    const allCombinations = this.getCombinations(arr, k);
+  private findTerceBestShuffle(
+    arr: number[],
+    grupo1: number[],
+    grupo2: number[]
+  ): [number[], number[]] {
+    // Número de jugadores a añadir a grupo1 para completar 5 jugadores
+    const numPlayersToAddToGroup1 = 5 - grupo1.length;
+
+    // Generar todas las combinaciones posibles de jugadores no asignados
+    const allCombinations = this.getCombinations(arr, numPlayersToAddToGroup1);
+
     let bestCombination: [number[], number[]] | null = null;
     let minDifference = Infinity;
     let secondBestCombination: [number[], number[]] | null = null;
@@ -148,11 +194,16 @@ export class DotaPlayerDataSource {
     let terceMinDifference = Infinity;
 
     for (let i = 0; i < allCombinations.length; i++) {
-      const group1 = allCombinations[i];
-      const group2 = arr.filter((player) => !group1.includes(player));
+      const additionalGroup1 = allCombinations[i];
+      const additionalGroup2 = arr.filter(
+        (player) => !additionalGroup1.includes(player)
+      );
 
-      const sum1 = group1.reduce((acc, num) => acc + num, 0);
-      const sum2 = group2.reduce((acc, num) => acc + num, 0);
+      const newGroup1 = [...grupo1, ...additionalGroup1];
+      const newGroup2 = [...grupo2, ...additionalGroup2];
+
+      const sum1 = newGroup1.reduce((acc, num) => acc + num, 0);
+      const sum2 = newGroup2.reduce((acc, num) => acc + num, 0);
       const difference = Math.abs(sum1 - sum2);
 
       if (difference < minDifference) {
@@ -161,9 +212,24 @@ export class DotaPlayerDataSource {
         minDifference = difference;
         terceBestCombination = secondBestCombination;
         secondBestCombination = bestCombination;
-        bestCombination = [group1, group2];
+        bestCombination = [newGroup1, newGroup2];
+      } else if (
+        difference < secondMinDifference &&
+        difference !== minDifference
+      ) {
+        terceMinDifference = secondMinDifference;
+        secondMinDifference = difference;
+        terceBestCombination = secondBestCombination;
+        secondBestCombination = [newGroup1, newGroup2];
+      } else if (
+        difference < terceMinDifference &&
+        difference !== secondMinDifference
+      ) {
+        terceMinDifference = difference;
+        terceBestCombination = [newGroup1, newGroup2];
       }
     }
+
     return terceBestCombination!;
   }
 
@@ -224,6 +290,7 @@ export class DotaPlayerDataSource {
 
   public setPlayers(players: DotaPlayerModel[]) {
     this.data.next(players);
+    this.group0.next(players);
   }
 
   public countPlayersNotInTeam() {
@@ -254,6 +321,7 @@ export class DotaPlayerDataSource {
       medal: `${this.onMedal(mmr)}.webp`,
     };
     this.data.value.push(player);
+    this.group0.value.push(player);
   }
 
   public editPlayer(id: number, name: string, mmr: number) {
@@ -266,9 +334,55 @@ export class DotaPlayerDataSource {
       return player;
     });
     this.data.next(players);
+    this.group0.next(players);
   }
 
   public movePlayer(id: number, team: number) {
+    if (this.countPlayersNotInTeam() > 0) {
+      switch (team) {
+        case 0:
+          // Remove player, for group 1 or group 2
+          this.group1.next(
+            this.group1.value.filter((player) => player.id !== id)
+          );
+          this.group2.next(
+            this.group2.value.filter((player) => player.id !== id)
+          );
+          // Add player to group 0, to
+          this.group0.value.push(
+            this.data.value.find((player) => player.id === id)!
+          );
+          break;
+        case 1:
+          // Remove player, for group 0 or group 2
+          this.group0.next(
+            this.group0.value.filter((player) => player.id !== id)
+          );
+          this.group2.next(
+            this.group2.value.filter((player) => player.id !== id)
+          );
+          // Add player to group 1
+          this.group1.value.push(
+            this.data.value.find((player) => player.id === id)!
+          );
+          break;
+        case 2:
+          // Remove player, for group 0 or group 1
+          this.group0.next(
+            this.group0.value.filter((player) => player.id !== id)
+          );
+          this.group1.next(
+            this.group1.value.filter((player) => player.id !== id)
+          );
+          // Add player to group 2
+          this.group2.value.push(
+            this.data.value.find((player) => player.id === id)!
+          );
+          break;
+        default:
+          break;
+      }
+    }
     const players = this.data.value.map((player) => {
       if (player.id === id) {
         player.team = team;
@@ -290,29 +404,50 @@ export class DotaPlayerDataSource {
   public deletePlayer(id: number) {
     const players = this.data.value.filter((player) => player.id !== id);
     this.data.next(players);
+    this.group0.next(players);
   }
 
   public deleteAll() {
     this.data.next([]);
+    this.group0.next([]);
+    this.group1.next([]);
+    this.group2.next([]);
   }
 
   public onShuffle() {
     const players = this.data.value;
-    if (players.length !== 10) {
+    const group0 = this.group0.value;
+    const group1 = this.group1.value;
+    const group2 = this.group2.value;
+    if (group0.length + group1.length + group2.length !== 10) {
       throw new Error('Error, Then number of players must be 10!');
     }
-    const plarysMmr = players.map((player) => player.mmr);
+    const group0Mmr = group0.map((player) => player.mmr);
+    console.log('MMR del grupo 0: ', group0Mmr);
+    const group1Mmr = group1.map((player) => player.mmr);
+    console.log('MMR del grupo 1: ', group1Mmr);
+    const group2Mmr = group2.map((player) => player.mmr);
+    console.log('MMR del grupo 2: ', group2Mmr);
     let bestCombinatiosMmr: [number[], number[]] = [[], []];
     if (this.numberShuffle === 0) {
-      bestCombinatiosMmr = this.findBestGroups(plarysMmr);
+      bestCombinatiosMmr = this.findBestGroups(group0Mmr, group1Mmr, group2Mmr);
       this.numberShuffle++;
     } else if (this.numberShuffle === 1) {
-      bestCombinatiosMmr = this.findSecondBestShuffle(plarysMmr);
+      bestCombinatiosMmr = this.findSecondBestShuffle(
+        group0Mmr,
+        group1Mmr,
+        group2Mmr
+      );
       this.numberShuffle++;
     } else {
-      bestCombinatiosMmr = this.findTerceBestShuffle(plarysMmr);
+      bestCombinatiosMmr = this.findTerceBestShuffle(
+        group0Mmr,
+        group1Mmr,
+        group2Mmr
+      );
       this.numberShuffle = 0;
     }
+    console.log('Mejores combinaciones de MMR: ', bestCombinatiosMmr);
     // console.log('Mejores combinaciones de MMR: ', bestCombinatiosMmr);
     // Asignando el Team 1 y Team 2
     players.forEach((player) => {
@@ -332,6 +467,9 @@ export class DotaPlayerDataSource {
       return player;
     });
     this.data.next(players);
+    this.group0.next(players);
+    this.group1.next([]);
+    this.group2.next([]);
   }
 
   public getTotal(team: number): number {
