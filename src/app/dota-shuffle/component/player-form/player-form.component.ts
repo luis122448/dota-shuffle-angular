@@ -76,6 +76,7 @@ export class PlayerFormComponent {
           message: 'Error, Then number of players must be 10!',
         },
       });
+      return;
     }
     this.onUnlock.emit(unlock);
     this.unlock.set(unlock);
