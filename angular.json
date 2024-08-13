@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "dota-shuffle-angular:build:production"
+              "buildTarget": "dota-shuffle-angular:build:production"
             },
             "development": {
-              "browserTarget": "dota-shuffle-angular:build:development"
+              "buildTarget": "dota-shuffle-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dota-shuffle-angular:build"
+            "buildTarget": "dota-shuffle-angular:build"
           }
         },
         "test": {
@@ -127,7 +127,7 @@
           "defaultConfiguration": "production"
         },
         "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
           "configurations": {
             "development": {
               "browserTarget": "dota-shuffle-angular:build:development",
@@ -141,7 +141,7 @@
           "defaultConfiguration": "development"
         },
         "prerender": {
-          "builder": "@nguniversal/builders:prerender",
+          "builder": "@angular-devkit/build-angular:prerender",
           "options": {
             "routes": [
               "/"
