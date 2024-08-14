@@ -43,19 +43,33 @@ export class PlayerFormComponent {
       return;
     }
     try {
+      console.log(this.formPlayer.value);
+      console.log(this.playerDataSouce.getPlayers());
       const name = this.formPlayer.get('name')?.value;
       const mmr = this.formPlayer.get('mmr')?.value.trim();
-      this.playerDataSouce.addPlayer(name, mmr);
+
+      const existingPlayer = this.playerDataSouce.getPlayers().find(player => player.name === name && player.mmr === mmr);
+
+      if (existingPlayer) {
+        throw new Error('The player already exists in the roster.');
+      }
+
       console.log(this.playerDataSouce.getPlayers());
+
+      this.playerDataSouce.addPlayer(name, mmr);
+
+      console.log(this.playerDataSouce.getPlayers());
+
       this.BuildForm();
-      // ejecute 0.250s
-      setTimeout(() => {
-        this.onCalculate.emit(true);
-      }, 250);
-      this.defaultValuesService.setLocalStorageValue(
-        'players',
-        this.playerDataSouce.getPlayers()
-      );
+      // setTimeout(() => {
+      //   this.onCalculate.emit(true);
+      // }, 250);
+      // this.defaultValuesService.setLocalStorageValue(
+      //   'players',
+      //   this.playerDataSouce.getPlayers()
+      // );
+
+      console.log(this.playerDataSouce.getPlayers());
     } catch (error: any) {
       this.dialog.open(DialogErrorAlertComponent, {
         width: '400px',
@@ -66,6 +80,7 @@ export class PlayerFormComponent {
       });
     }
   }
+
 
   unlockPlayer(unlock: boolean) {
     if (this.playerDataSouce.getPlayers().length < 10) {

@@ -318,7 +318,7 @@ export class DotaPlayerDataSource {
 
   public addPlayer(name: string, mmr: number) {
     if (this.data.value.length >= 10) {
-      throw new Error('No se pueden agregar más de 10 jugadores');
+      throw new Error('Error, Then number of players must be 10!');
     }
     const maxId = this.data.value.reduce(
       (max, player) => (player.id > max ? player.id : max),
@@ -332,8 +332,8 @@ export class DotaPlayerDataSource {
       team: 0,
       medal: `${this.onMedal(mmr)}.webp`,
     };
-    this.data.value.push(player);
-    this.group0.value.push(player);
+    this.data.next([...this.data.value, player]);
+    this.group0.next([...this.group0.value, player]);
   }
 
   public editPlayer(id: number, name: string, mmr: number) {
@@ -414,9 +414,9 @@ export class DotaPlayerDataSource {
   }
 
   public deletePlayer(id: number) {
-    const players = this.data.value.filter((player) => player.id !== id);
-    this.data.next(players);
-    this.group0.next(players);
+    const remainingPlayers = this.data.value.filter(player => player.id !== id);
+    this.data.next(remainingPlayers);
+    this.group0.next(remainingPlayers);
   }
 
   public deleteAll() {
