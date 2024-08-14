@@ -82,6 +82,17 @@ export class DialogChangelogComponent {
         '🔓 Unlock teams to set specific player positions and shuffle others.',
         '🔄 Visual indicators for locked/unlocked status.'
       ]
+    },
+    {
+      id: 7,
+      title: 'Bug Fix: Duplicate Player Issue 🐛',
+      date: new Date('2024-08-14'),
+      description: 'Resolved an issue where the last player would duplicate upon deletion of the previous player and addition of a new one.',
+      version: '1.5.1',
+      features: [
+        '🔧 Fixed duplication of the last player when deleting and adding new players.',
+        '⚙️ Improved data synchronization across all player groups.'
+      ]
     }
   ];
 
