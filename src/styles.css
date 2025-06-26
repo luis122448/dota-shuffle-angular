@@ -1,0 +1,164 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/cdk/overlay-prebuilt.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::ng-deep .mat-snack-bar-container {
+  margin: 0;
+  padding: 0;
+}
+
+.mat-snack-bar-container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.mat-snack-bar {
+  box-shadow: none !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.span-input-disabled {
+  @apply h-7 w-full min-w-20 md:min-w-24 2xl:min-w-32 rounded-sm border-2 border-slate-800 px-1 sm:px-2 py-0.5 text-xs md:text-sm text-slate-800 placeholder-transparent
+  hover:border-sky-700 hover:outline-none
+  hover:ring-1 hover:ring-sky-700
+  focus:border-sky-700 focus:outline-none
+  focus:ring-2 focus:ring-sky-700
+  bg-slate-300 font-semibold
+  dark:border-0 dark:text-gray-400 dark:bg-slate-800;
+}
+
+.input-default {
+  @apply h-7 w-full rounded-sm border-2 border-slate-800 px-2 py-1 text-xs text-slate-800 placeholder-transparent
+  hover:border-sky-700 hover:outline-none
+  hover:ring-1 hover:ring-sky-700
+  focus:border-sky-700 focus:outline-none
+  focus:ring-2 focus:ring-sky-700
+  disabled:bg-slate-300 disabled:font-semibold
+  dark:border-0 dark:bg-gray-600 dark:text-gray-400 dark:disabled:bg-slate-800;
+}
+
+.input-invalid {
+  @apply border-2 border-red-600 placeholder-current placeholder:font-semibold placeholder:tracking-wide placeholder:text-red-600
+  dark:border-sky-500 dark:placeholder:text-sky-500;
+}
+
+.button-icon-overlay {
+  @apply h-7 w-7 rounded-md border-2 border-slate-800 text-white
+  hover:scale-110 hover:transform
+  dark:border-sky-900;
+}
+
+.button-icon-operac {
+  @apply relative h-7 w-7 rounded-md border-2 border-slate-800 text-white
+  hover:scale-110 hover:transform text-xl
+  dark:border-sky-900;
+}
+
+.button-icon-operac-delete {
+  @apply relative h-7 w-7 rounded-md border-2 border-red-600 bg-red-700 text-white
+  hover:scale-110 hover:transform
+  dark:border-red-700 dark:bg-red-800;
+}
+
+.icon-operac-button {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-200
+  dark:text-slate-100;
+}
+
+.icon-operac {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-800
+  dark:text-slate-100;
+}
+
+.icon-operac-inverse {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-slate-100
+  dark:text-slate-800;
+}
+
+.text-input-disabled {
+  @apply block my-auto w-full mx-0 p-0 text-xs text-slate-800
+  dark:text-gray-400 font-bold dark:font-semibold;
+}
+
+.text-inline {
+  @apply m-0 p-0 text-xs text-slate-800
+  dark:text-gray-400;
+}
+
+.text-inline-sm {
+  @apply m-0 p-0 text-xs sm:text-sm text-slate-800
+  dark:text-gray-400;
+}
+
+.text-inline-md {
+  @apply m-0 p-0 text-base text-slate-800 dark:text-gray-400;
+}
+
+.text-inline-lg {
+  @apply m-0 p-0 text-lg text-slate-800 dark:text-gray-400;
+}
+
+.dialog-alert-container {
+  @apply m-auto flex h-auto w-[400px] flex-col space-y-6 overflow-hidden rounded-md bg-slate-100 p-4
+  dark:bg-slate-900;
+}
+
+.default-container {
+  @apply m-auto bg-slate-100
+  dark:bg-slate-900 dark:text-gray-400;
+}
+
+.default-container-light {
+  @apply m-auto bg-slate-50
+  dark:bg-slate-800 dark:text-gray-400;
+}
+
+.divide-line {
+  @apply divide-y divide-dotted divide-slate-500;
+}
+
+.example-list {
+  @apply flex flex-col w-full space-y-2 h-[300px] overflow-hidden rounded-lg border-[3px] border-gray-800 px-1 py-2 dark:border-gray-400;
+}
+
+.example-list-explain {
+  @apply flex flex-col min-w-72 sm:min-w-48 sm:w-full space-y-2 h-full sm:h-[520px] overflow-y-auto rounded-lg border-[3px] border-gray-800 px-1 py-2 dark:border-gray-400;
+}
+
+.element-list {
+  @apply flex flex-row w-full space-x-2 px-2 py-1 dark:bg-gray-700;
+}/*# sourceMappingURL=styles.css.map */

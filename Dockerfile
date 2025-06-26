@@ -37,7 +37,7 @@ COPY --from=build /home/app/package*.json /home/app
 
 RUN npm install --only=production
 
-EXPOSE 4203
+EXPOSE 4000
 
 # Command to run the app with SSR
 CMD ["node", "dist/dota-shuffle-angular/server/main.js"]

@@ -1,0 +1,28 @@
+@charset "UTF-8";
+#themeSwitcher:checked + label .switchball {
+  background-color: transparent;
+  transform: translateX(20px);
+  transition: transform 0.4s ease-in-out;
+}
+
+#themeSwitcher:not(:checked) + label .switchball {
+  background-color: transparent;
+  transform: translateX(-12px); /* Vuelve a la posición inicial al no estar marcado */
+  transition: transform 0.4s ease-in-out;
+}
+
+.light {
+  color: #eab308;
+}
+
+.dark {
+  color: #0c4a6e;
+}
+
+.dark-alternative {
+  color: #9ca3af;
+}
+
+.display-none {
+  display: none;
+}/*# sourceMappingURL=theme-switcher.component.css.map */

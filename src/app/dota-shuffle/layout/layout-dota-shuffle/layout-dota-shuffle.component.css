@@ -1,0 +1,49 @@
+.main-container {
+  width: 800px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.body-container {
+  width: 100%;
+  height: calc(100% - 110px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+@media (min-width: 1024px) {
+  .main-container {
+    width: calc(100% - 400px);
+  }
+}
+@media (min-width: 1280px) {
+  .main-container {
+    width: calc(100% - 500px);
+  }
+}
+@keyframes changeBackground {
+  0% {
+    background-image: url("/assets/image/wallpaper/dota-1.webp");
+  }
+  25% {
+    background-image: url("/assets/image/wallpaper/dota-1.webp");
+  }
+  50% {
+    background-image: url("/assets/image/wallpaper/dota-1.webp");
+  }
+  75% {
+    background-image: url("/assets/image/wallpaper/dota-1.webp");
+  }
+  100% {
+    background-image: url("/assets/image/wallpaper/dota-1.webp");
+  }
+}
+.animated-bg {
+  animation: changeBackground 20s infinite;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}/*# sourceMappingURL=layout-dota-shuffle.component.css.map */

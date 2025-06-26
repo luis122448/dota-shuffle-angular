@@ -45,3 +45,7 @@ Thumbs.db
 
 # Enviorment files
 .env
+
+# Kubernetes
+configmap.yaml
+secret.yaml

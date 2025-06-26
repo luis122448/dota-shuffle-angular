@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dota-shuffle-frontend-deployment
+  namespace: dota-shuffle
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dota-shuffle
+  template:
+    metadata:
+      labels:
+        app: dota-shuffle
+    spec:
+      containers:
+      - name: dota-shuffle-frontend-container
+        image: luis122448/dota-shuffle-frontend:v1.0.0
+        ports:
+        - containerPort: 4000
+        env:
+        - name: API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: dota-shuffle-config
+              key: API_URL
+        - name: WS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: dota-shuffle-config
+              key: WS_URL
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"

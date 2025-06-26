@@ -13,4 +13,4 @@ services:
         API_URL: $API_URL
         WS_URL: $WS_URL
     ports:
-      - "4203:4203"
+      - "4203:4000"
