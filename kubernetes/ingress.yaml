@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dota-shuffle-frontend-ingress
+  name: frontend-ingress
   namespace: dota-shuffle
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -20,10 +20,10 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: dota-shuffle-frontend-service
+              name: frontend-service
               port:
                 number: 4203
   tls:
     - hosts:
       - dota-shuffle.luis122448.com
-      secretName: dota-shuffle-tls
+      secretName: dota-shuffle-luis122448-com-tls

@@ -3,7 +3,7 @@
 
 # --- Configuration ---
 DOCKER_USERNAME="luis122448"
-IMAGE_NAME="dota-shuffle-frontend"
+IMAGE_NAME="dota-shuffle"
 IMAGE_TAG="v1.0.0" # Standardized version tag
 FULL_IMAGE_NAME="${DOCKER_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}"
 DOCKERFILE_PATH="." # Path to the directory containing the Dockerfile

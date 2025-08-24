@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dota-shuffle-frontend-deployment
+  name: frontend-deployment
   namespace: dota-shuffle
 spec:
   replicas: 2
@@ -14,7 +14,7 @@ spec:
         app: dota-shuffle
     spec:
       containers:
-      - name: dota-shuffle-frontend-container
+      - name: dota-shuffle-container
         image: luis122448/dota-shuffle-frontend:v1.0.0
         ports:
         - containerPort: 4000
