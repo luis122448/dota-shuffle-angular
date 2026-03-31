@@ -1,43 +1,29 @@
-# Build stage
+# Stage 1: Build the Angular application
 FROM node:22-alpine AS build
 
-WORKDIR /home/app
+WORKDIR /app
 
-# Set environment variables
-ARG API_URL
-ARG WS_URL
-
-# Set environment variables for the build process
-ENV API_URL=$API_URL
-ENV WS_URL=$WS_URL
-
-COPY ./angular.json /home/app
-COPY ./package*.json /home/app
-COPY ./tsconfig*.json /home/app
-COPY ./tailwind.config.js /home/app
-COPY ./server.ts /home/app
+COPY package.json package-lock.json ./
 RUN npm install
 
-COPY ./src /home/app/src
+COPY . .
 
-# Replace environment placeholders
-RUN sed -i "s#\\[API_URL\\]#$API_URL#g" /home/app/src/environments/environment.ts
-RUN sed -i "s#\\[WS_URL\\]#$WS_URL#g" /home/app/src/environments/environment.ts
+# Environment argument for the build
+ARG env=production
 
-RUN npm run build:ssr --prod
+# Build the application
+RUN npm run build -- --configuration=${env}
 
-# Serve stage
-FROM node:22-alpine AS serve
+# Stage 2: Serve the application with Nginx
+FROM nginx:alpine
 
-WORKDIR /home/app
+# Copy the build output from the build stage
+COPY --from=build /app/dist/dota-shuffle-angular/browser /usr/share/nginx/html
 
-# Copy the build output and package files
-COPY --from=build /home/app/dist /home/app/dist
-COPY --from=build /home/app/package*.json /home/app
+# Copy the custom Nginx configuration
+COPY nginx/conf.d /etc/nginx/conf.d
+COPY entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
 
-RUN npm install --only=production
-
-EXPOSE 4000
-
-# Command to run the app with SSR
-CMD ["node", "dist/dota-shuffle-angular/server/main.js"]
+ENTRYPOINT ["/entrypoint.sh"]
+EXPOSE 80

@@ -7,10 +7,9 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        API_URL: $API_URL
-        WS_URL: $WS_URL
+        env: production
     environment:
-        API_URL: $API_URL
-        WS_URL: $WS_URL
+      API_URL_METRICS: ${API_URL_METRICS}
+      WS_URL_METRICS: ${WS_URL_METRICS}
     ports:
-      - "4203:4000"
+      - "4203:80"

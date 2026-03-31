@@ -1,6 +1,6 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: dota-shuffle
+  name: my-portfolio
   labels:
     environment: production

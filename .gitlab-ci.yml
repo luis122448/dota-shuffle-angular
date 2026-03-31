@@ -1,0 +1,130 @@
+default:
+  image: public.ecr.aws/docker/library/docker:24.0.7
+
+stages:
+  - build
+  - deploy
+  - notify
+
+# ==============================================================
+# PRODUCTION (branch: main)
+# ==============================================================
+
+build-prod:
+  stage: build
+  tags: [self-hosted, linux, prod, arm64]
+  services:
+    - name: docker:24.0.7-dind
+      alias: docker
+      command: ["--host=tcp://0.0.0.0:2375", "--tls=false"]
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - set -e
+    - export VERSION="1.0.${CI_PIPELINE_IID}"
+    - export ENV_TAG="production"
+    - echo "Version:" "${VERSION}"
+    - echo "Environment:" "${ENV_TAG}"
+    - echo "${DOCKER_PASSWORD_CLOUD}" | docker login harbor.bbg.pe -u "${DOCKER_USERNAME_CLOUD}" --password-stdin
+    - chmod +x build-release.sh
+    - ./build-release.sh "${VERSION}" "${ENV_TAG}" arm64 harbor.bbg.pe my-portfolio
+
+deploy-prod:
+  stage: deploy
+  tags: [self-hosted, linux, lite, prod]
+  image: alpine/k8s:1.32.0
+  environment:
+    name: production
+  needs: [build-prod]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - set -e
+    - export KUBE_NAMESPACE="my-portfolio"
+    - export KUBE_CONTEXT="ctx-production"
+    - mkdir -p ~/.kube
+    - echo "$KUBE_CONFIG" | base64 -d > ~/.kube/config
+    - kubectl config use-context "$KUBE_CONTEXT"
+    - kubectl rollout restart deployment frontend-deployment -n "$KUBE_NAMESPACE"
+
+notify-prod:
+  stage: notify
+  tags: [self-hosted, linux, lite, prod]
+  needs: [deploy-prod]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - set -e
+    - echo ""
+    - echo "=============================================================="
+    - echo "Deployment has been successfully triggered in PRODUCTION."
+    - export APP_URL="https://dota.bbg.pe"
+    - echo "Please verify the application is working correctly at:"
+    - echo "${APP_URL}"
+    - echo "If any issue is detected, review the deployment logs immediately."
+    - echo "=============================================================="
+
+# ==============================================================
+# DEVELOPMENT (branch: develop)
+# ==============================================================
+
+build-dev:
+  stage: build
+  tags: [self-hosted, linux, dev, arm64]
+  services:
+    - name: docker:24.0.7-dind
+      alias: docker
+      command: ["--host=tcp://0.0.0.0:2375", "--tls=false"]
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+  script:
+    - set -e
+    - export VERSION="1.0.${CI_PIPELINE_IID}"
+    - export ENV_TAG="development"
+    - echo "Version:" "${VERSION}"
+    - echo "Environment:" "${ENV_TAG}"
+    - echo "${DOCKER_PASSWORD}" | docker login harbor.bbg.pe -u "${DOCKER_USERNAME}" --password-stdin
+    - chmod +x build-release.sh
+    - ./build-release.sh "${VERSION}" "${ENV_TAG}" arm64 harbor.bbg.pe my-portfolio
+
+deploy-dev:
+  stage: deploy
+  tags: [self-hosted, linux, lite, dev]
+  image: alpine/k8s:1.32.0
+  environment:
+    name: development
+  when: manual
+  needs: [build-dev]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+  script:
+    - set -e
+    - export KUBE_NAMESPACE="my-portfolio"
+    - export KUBE_CONTEXT="ctx-development"
+    - mkdir -p ~/.kube
+    - echo "$KUBE_CONFIG" | base64 -d > ~/.kube/config
+    - kubectl config use-context "$KUBE_CONTEXT"
+    - kubectl rollout restart deployment frontend-deployment -n "$KUBE_NAMESPACE"
+
+notify-dev:
+  stage: notify
+  tags: [self-hosted, linux, lite, dev]
+  needs: [deploy-dev]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+  script:
+    - set -e
+    - echo ""
+    - echo "=============================================================="
+    - echo "Deployment has been successfully triggered in Testing/Development."
+    - export APP_URL="https://dota.test.bbg.pe"
+    - echo "Please verify the application is working correctly at:"
+    - echo "${APP_URL}"
+    - echo "If any issue is detected, review the deployment logs immediately."
+    - echo "=============================================================="
