@@ -1,48 +1,59 @@
-![Logo del Projecto](./resources/logo.png)
+![Project Logo](./resources/logo.png)
 
 # Dota 2 Shuffler MMR
 
-Aplicación para registrar 10 jugadores y equilibrarlos en dos equipos según el MMR, buscando que la diferencia entre los equipos sea la menor posible.
+Application to register 10 players and balance them into two teams based on MMR, minimizing the difference between teams.
 
-## Características
-- Modelado e implemantacion de interfaces con HTML, CSS y TailwindCSS.
-- Routing y Navegación con Angular Router.
-- Configuracion con Nginx para el despliegue en producción.
-- Automatización del despliegue con Docker y Docker-Compose.
-- Aplicacion con soporte para modo oscuro.
+## Features
+- UI built with HTML, CSS and TailwindCSS.
+- Routing and navigation with Angular Router.
+- Nginx reverse proxy for dynamic backend routing at runtime.
+- Automated build and deployment with Docker and GitLab CI/CD.
+- Dark mode support.
 
-## Configuración del Entorno
+## Environment Setup
 
-1. **Clonar el Repositorio**
+1. **Clone the repository**
     ```bash
-        git clone https://github.com/luis122448/dota-shuffle.git
+    git clone https://github.com/luis122448/dota-shuffle-angular.git
+    cd dota-shuffle-angular
     ```
 
-2. **Ingresar al directorio del proyecto**
-
+2. **Run the bootstrap script**
     ```bash
-        cd dota-shuffle
+    ./dev-install.sh
     ```
 
-3. **Ejecutar el script de instalación**
-  
+3. **Start the development server**
     ```bash
-        sudo bash dev-install.sh
+    ./dev-init.sh
     ```
 
-## Despliegue en Producción
+## Production Deployment
 
-Para el despliegue en producción se ha utilizado Docker y Docker Compose, puede revisar el archivo docker-compose.yml para conocer los detalles de la configuración.
-Asimismo no se olvide de modificar las variables de entono, en asi archivo .env
+The project uses Docker with Nginx to serve the Angular build and proxy API requests at runtime.
 
-1. **Ejecutar el script de despliegue**
-  
+1. **Copy and configure environment variables**
     ```bash
-        sudo bash deploy.sh
+    cp .env.example .env
+    # Fill in API_URL_METRICS and WS_URL_METRICS
     ```
 
-## Contribuciones
-Las contribuciones son bienvenidas. Siéntete libre de mejorar este proyecto, agregar nuevas características o corregir problemas identificados. Para contribuir, crea un Pull Request o abre un Issue.
+2. **Run with Docker Compose**
+    ```bash
+    docker-compose up -d
+    ```
 
-## Licencia
-Este proyecto está bajo la licencia MIT License.
+## Local Docker Testing
+
+To build and test the Docker image locally using a local registry:
+
+```bash
+./dev-deploy.sh
+```
+
+## Contributing
+Contributions are welcome. Feel free to improve this project, add new features or fix identified issues. To contribute, create a Pull Request or open an Issue.
+
+## License
+This project is licensed under the MIT License.

@@ -4,7 +4,7 @@
 
 set -e
 
-IMAGE_NAME="dota-shuffle-frontend"
+IMAGE_NAME="ng-dota-shuffle"
 CONTAINER_NAME="dota-shuffle-angular"
 LOCAL_PORT="4203"
 CONTAINER_PORT="80"
