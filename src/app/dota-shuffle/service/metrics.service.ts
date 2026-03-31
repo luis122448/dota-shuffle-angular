@@ -9,7 +9,7 @@ import { ApiResponseObject } from '../model/api-response.model';
 })
 export class MetricsService {
 
-  API_URL = environment.API_URL + '/app';
+  API_URL = environment.API_URL;
 
   constructor(
     private httpCliente: HttpClient
