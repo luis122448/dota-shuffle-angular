@@ -6,7 +6,7 @@ set -e
 
 # --- Configuration ---
 DOCKERFILE_PATH="."
-IMAGE_NAME="dota-shuffle-frontend"
+IMAGE_NAME="ng-dota-shuffle"
 
 # --- Inputs ---
 VERSION="$1"
