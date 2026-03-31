@@ -8,7 +8,7 @@ import { MetricsModel } from '../model/metrics.model';
 })
 export class WebSocketService {
 
-  WS_URL = environment.WS_URL + '/app/metrics/websocket/1';
+  WS_URL = environment.WS_URL + '/metrics/websocket/1';
 
   private webSocket!: WebSocket;
   private reconnectAttempts: number = 0;
